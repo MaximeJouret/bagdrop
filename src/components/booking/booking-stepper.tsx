@@ -1,21 +1,32 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useBookingFlow } from "@/hooks/use-booking-flow";
 import { cn } from "@/lib/utils";
 
-const steps = [
+const storageSteps = [
   { label: "Casier", path: "/reserver" },
   { label: "Horaires", path: "/horaires" },
   { label: "Paiement", path: "/paiement" },
   { label: "Confirmation", path: "/confirmation" },
 ];
 
+const deliverySteps = [
+  { label: "Casier", path: "/reserver" },
+  { label: "Livraison", path: "/livraison" },
+  { label: "Paiement", path: "/paiement" },
+  { label: "Confirmation", path: "/confirmation" },
+];
+
 export function BookingStepper() {
   const pathname = usePathname();
+  const { state } = useBookingFlow();
+
+  const steps = state.bookingType === "DELIVERY" ? deliverySteps : storageSteps;
 
   function getStepIndex() {
     if (pathname.startsWith("/reserver")) return 0;
-    if (pathname.startsWith("/horaires")) return 1;
+    if (pathname.startsWith("/horaires") || pathname.startsWith("/livraison")) return 1;
     if (pathname.startsWith("/paiement")) return 2;
     if (pathname.startsWith("/confirmation")) return 3;
     return 0;

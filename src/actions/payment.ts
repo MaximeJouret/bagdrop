@@ -14,6 +14,9 @@ const CreateCheckoutSchema = z.object({
   lockerLabel: z.string(),
   lockerSize: z.enum(["SMALL", "LARGE"]),
   trailerName: z.string(),
+  bookingType: z.enum(["STORAGE", "DELIVERY"]).default("STORAGE"),
+  deliveryRunId: z.string().uuid().nullable().default(null),
+  depositDeadline: z.string().datetime().nullable().default(null),
 });
 
 export async function createCheckoutSession(input: z.infer<typeof CreateCheckoutSchema>) {
@@ -43,13 +46,15 @@ export async function createCheckoutSession(input: z.infer<typeof CreateCheckout
       qr_code: qrCode,
       status: "PENDING",
       payment_status: "PENDING",
+      booking_type: parsed.bookingType,
+      delivery_run_id: parsed.deliveryRunId,
+      deposit_deadline: parsed.depositDeadline,
     })
     .select()
     .single();
 
   if (bookingError) {
     if (bookingError.code === "23P01") {
-      // Exclusion constraint violation — locker already booked
       throw new Error("Ce casier n'est plus disponible pour ce créneau. Veuillez en choisir un autre.");
     }
     throw new Error("Erreur lors de la création de la réservation.");
@@ -57,6 +62,15 @@ export async function createCheckoutSession(input: z.infer<typeof CreateCheckout
 
   // Create Stripe Checkout Session
   const sizeLabel = parsed.lockerSize === "LARGE" ? "Grand casier" : "Petit casier";
+  const productName =
+    parsed.bookingType === "DELIVERY"
+      ? `BagDrop Aéroport — ${sizeLabel} (${parsed.lockerLabel})`
+      : `BagDrop — ${sizeLabel} (${parsed.lockerLabel})`;
+  const productDescription =
+    parsed.bookingType === "DELIVERY"
+      ? `${parsed.trailerName} → Brussels Airport`
+      : parsed.trailerName;
+
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
     ui_mode: "embedded_page",
@@ -65,8 +79,8 @@ export async function createCheckoutSession(input: z.infer<typeof CreateCheckout
         price_data: {
           currency: "eur",
           product_data: {
-            name: `BagDrop — ${sizeLabel} (${parsed.lockerLabel})`,
-            description: `${parsed.trailerName}`,
+            name: productName,
+            description: productDescription,
           },
           unit_amount: Math.round(parsed.totalPrice * 100),
         },
@@ -76,6 +90,7 @@ export async function createCheckoutSession(input: z.infer<typeof CreateCheckout
     metadata: {
       bookingId: booking.id,
       userId: user.id,
+      bookingType: parsed.bookingType,
     },
     return_url: `${process.env.NEXT_PUBLIC_APP_URL}/confirmation?session_id={CHECKOUT_SESSION_ID}`,
   });

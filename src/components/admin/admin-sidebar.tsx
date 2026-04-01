@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Truck, CalendarRange, ScanLine } from "lucide-react";
+import { LayoutDashboard, Truck, CalendarRange, ScanLine, Plane } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { label: "Remorques", href: "/admin/trailers", icon: Truck },
   { label: "Réservations", href: "/admin/reservations", icon: CalendarRange },
+  { label: "Livraisons", href: "/admin/deliveries", icon: Plane },
   { label: "Scanner QR", href: "/admin/scanner", icon: ScanLine },
 ];
 

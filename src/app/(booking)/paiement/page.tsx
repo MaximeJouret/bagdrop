@@ -24,8 +24,6 @@ export default function PaiementPage() {
     if (
       !state.lockerId ||
       !state.trailerId ||
-      !state.startTime ||
-      !state.endTime ||
       !state.totalPrice ||
       !state.lockerLabel ||
       !state.lockerSize ||
@@ -34,16 +32,32 @@ export default function PaiementPage() {
       throw new Error("Données de réservation manquantes");
     }
 
+    // For delivery bookings, use deposit deadline as start and departure as end
+    const isDelivery = state.bookingType === "DELIVERY";
+    if (!isDelivery && (!state.startTime || !state.endTime)) {
+      throw new Error("Données de réservation manquantes");
+    }
+
+    const startTime = isDelivery
+      ? (state.depositDeadline || new Date().toISOString())
+      : state.startTime!;
+    const endTime = isDelivery
+      ? (state.depositDeadline || new Date().toISOString())
+      : state.endTime!;
+
     try {
       const result = await createCheckoutSession({
         lockerId: state.lockerId,
         trailerId: state.trailerId,
-        startTime: state.startTime,
-        endTime: state.endTime,
+        startTime,
+        endTime,
         totalPrice: state.totalPrice,
         lockerLabel: state.lockerLabel,
         lockerSize: state.lockerSize,
         trailerName: state.trailerName,
+        bookingType: state.bookingType,
+        deliveryRunId: state.deliveryRunId,
+        depositDeadline: state.depositDeadline,
       });
 
       return result.clientSecret!;

@@ -26,6 +26,21 @@ export default async function ReserverPage({ params }: Props) {
     .eq("trailer_id", trailerId)
     .order("label");
 
+  // Fetch delivery prices
+  const { data: deliveryPrices } = await supabase
+    .from("delivery_prices")
+    .select("*")
+    .eq("active", true);
+
+  // Check if there are upcoming scheduled deliveries for this trailer
+  const { data: upcomingDeliveries } = await supabase
+    .from("delivery_runs")
+    .select("id")
+    .eq("trailer_id", trailerId)
+    .eq("status", "SCHEDULED")
+    .gte("scheduled_departure", new Date().toISOString())
+    .limit(1);
+
   return (
     <div className="space-y-6">
       <div>
@@ -47,6 +62,8 @@ export default async function ReserverPage({ params }: Props) {
         trailerName={trailer.name}
         trailerAddress={trailer.address}
         trailerId={trailer.id}
+        deliveryPrices={deliveryPrices || []}
+        hasUpcomingDeliveries={(upcomingDeliveries?.length ?? 0) > 0}
       />
     </div>
   );

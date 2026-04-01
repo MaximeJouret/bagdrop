@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { LockerSize } from "@/types";
+import type { BookingType, LockerSize } from "@/types";
 
 interface BookingState {
   trailerId: string | null;
@@ -15,6 +15,11 @@ interface BookingState {
   endTime: string | null;
   durationHours: number | null;
   totalPrice: number | null;
+  bookingType: BookingType;
+  deliveryRunId: string | null;
+  depositDeadline: string | null;
+  deliveryPrice: number | null;
+  trackingToken: string | null;
 }
 
 interface BookingContextType {
@@ -22,6 +27,8 @@ interface BookingContextType {
   setTrailer: (id: string, name: string, address: string) => void;
   setLocker: (id: string, label: string, size: LockerSize, pricePerHour: number) => void;
   setTimeSlot: (startTime: string, endTime: string, durationHours: number) => void;
+  setBookingType: (type: BookingType) => void;
+  setDeliveryInfo: (runId: string, deadline: string, price: number, trackingToken: string) => void;
   reset: () => void;
 }
 
@@ -37,6 +44,11 @@ const initialState: BookingState = {
   endTime: null,
   durationHours: null,
   totalPrice: null,
+  bookingType: "STORAGE",
+  deliveryRunId: null,
+  depositDeadline: null,
+  deliveryPrice: null,
+  trackingToken: null,
 };
 
 const BookingContext = createContext<BookingContextType | null>(null);
@@ -62,12 +74,27 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     }));
   }
 
+  function setBookingType(type: BookingType) {
+    setState((prev) => ({ ...prev, bookingType: type }));
+  }
+
+  function setDeliveryInfo(runId: string, deadline: string, price: number, trackingToken: string) {
+    setState((prev) => ({
+      ...prev,
+      deliveryRunId: runId,
+      depositDeadline: deadline,
+      deliveryPrice: price,
+      totalPrice: price,
+      trackingToken,
+    }));
+  }
+
   function reset() {
     setState(initialState);
   }
 
   return (
-    <BookingContext.Provider value={{ state, setTrailer, setLocker, setTimeSlot, reset }}>
+    <BookingContext.Provider value={{ state, setTrailer, setLocker, setTimeSlot, setBookingType, setDeliveryInfo, reset }}>
       {children}
     </BookingContext.Provider>
   );

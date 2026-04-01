@@ -1,6 +1,6 @@
 "use client";
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Link from "next/link";
@@ -21,25 +21,54 @@ L.Icon.Default.mergeOptions({
     "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
 });
 
+const driverIcon = new L.Icon({
+  iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
+  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+
+const destinationIcon = new L.Icon({
+  iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
+  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+
 interface TrailerMapProps {
   trailers: (Trailer & { availableSmall: number; availableLarge: number })[];
+  driverPosition?: { lat: number; lng: number } | null;
+  destination?: { lat: number; lng: number } | null;
 }
 
 const BRUSSELS_CENTER: [number, number] = [50.8503, 4.3517];
 
-export function TrailerMap({ trailers }: TrailerMapProps) {
+export function TrailerMap({ trailers, driverPosition, destination }: TrailerMapProps) {
+  // If driver position exists, center on it; if only destination, center between Brussels and destination
+  const center: [number, number] = driverPosition
+    ? [driverPosition.lat, driverPosition.lng]
+    : BRUSSELS_CENTER;
+
+  const zoom = driverPosition && destination ? 11 : 13;
+
   return (
     <MapContainer
-      center={BRUSSELS_CENTER}
-      zoom={13}
+      center={center}
+      zoom={zoom}
       scrollWheelZoom
       className="h-full w-full rounded-lg"
-      style={{ minHeight: "500px" }}
+      style={{ minHeight: "300px" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+
+      {/* Trailer markers */}
       {trailers.map((trailer) => (
         <Marker
           key={trailer.id}
@@ -72,6 +101,39 @@ export function TrailerMap({ trailers }: TrailerMapProps) {
           </Popup>
         </Marker>
       ))}
+
+      {/* Driver position marker */}
+      {driverPosition && (
+        <Marker
+          position={[driverPosition.lat, driverPosition.lng]}
+          icon={driverIcon}
+        >
+          <Popup>Position actuelle</Popup>
+        </Marker>
+      )}
+
+      {/* Destination marker */}
+      {destination && (
+        <Marker
+          position={[destination.lat, destination.lng]}
+          icon={destinationIcon}
+        >
+          <Popup>Brussels Airport</Popup>
+        </Marker>
+      )}
+
+      {/* Line between driver and destination */}
+      {driverPosition && destination && (
+        <Polyline
+          positions={[
+            [driverPosition.lat, driverPosition.lng],
+            [destination.lat, destination.lng],
+          ]}
+          color="#2563eb"
+          weight={3}
+          dashArray="10, 10"
+        />
+      )}
     </MapContainer>
   );
 }

@@ -11,8 +11,10 @@ const TrailerMap = dynamic(
 
 interface DynamicMapProps {
   trailers: (Trailer & { availableSmall: number; availableLarge: number })[];
+  driverPosition?: { lat: number; lng: number } | null;
+  destination?: { lat: number; lng: number } | null;
 }
 
-export function DynamicMap({ trailers }: DynamicMapProps) {
-  return <TrailerMap trailers={trailers} />;
+export function DynamicMap({ trailers, driverPosition, destination }: DynamicMapProps) {
+  return <TrailerMap trailers={trailers} driverPosition={driverPosition} destination={destination} />;
 }

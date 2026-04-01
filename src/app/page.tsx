@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, QrCode, Shield, Clock } from "lucide-react";
+import { MapPin, QrCode, Shield, Clock, Plane } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button-variants";
 import { Card, CardContent } from "@/components/ui/card";
 import { DynamicMap } from "@/components/map/dynamic-map";
@@ -156,6 +156,79 @@ export default function HomePage() {
               </span>
             </CardContent>
           </Card>
+        </div>
+      </section>
+
+      {/* Airport Delivery */}
+      <section className="py-16 px-4 bg-blue-50 dark:bg-blue-950/20">
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full px-4 py-1.5 text-sm font-medium mb-4">
+              <Plane className="h-4 w-4" />
+              Nouveau
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              Vos bagages, livrés à l&apos;aéroport
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Déposez vos bagages dans nos casiers en ville, nous les transportons
+              directement à Brussels Airport. Suivez-les en temps réel.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                step: "1",
+                title: "Déposez en ville",
+                description: "Choisissez un casier près de vous et déposez votre bagage avant l'heure limite.",
+              },
+              {
+                step: "2",
+                title: "On transporte",
+                description: "Notre remorque part vers l'aéroport. Suivez votre bagage en temps réel sur la carte.",
+              },
+              {
+                step: "3",
+                title: "Récupérez à Zaventem",
+                description: "Retrouvez vos bagages au point de rendez-vous Kiss & Ride à Brussels Airport.",
+              },
+            ].map((item) => (
+              <div key={item.step} className="text-center">
+                <div className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                  {item.step}
+                </div>
+                <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                <p className="text-muted-foreground">{item.description}</p>
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-wrap justify-center gap-6 mt-10">
+            <Card className="bg-white dark:bg-background">
+              <CardContent className="flex items-center gap-3 py-3 px-5">
+                <span className="text-2xl font-bold text-blue-600">15 €</span>
+                <span className="text-sm text-muted-foreground">
+                  forfait — Petit casier
+                  <br />
+                  Bagage à main
+                </span>
+              </CardContent>
+            </Card>
+            <Card className="bg-white dark:bg-background">
+              <CardContent className="flex items-center gap-3 py-3 px-5">
+                <span className="text-2xl font-bold text-blue-600">25 €</span>
+                <span className="text-sm text-muted-foreground">
+                  forfait — Grand casier
+                  <br />
+                  Valise 23 kg
+                </span>
+              </CardContent>
+            </Card>
+          </div>
+          <div className="text-center mt-8">
+            <Link href="#map" className={cn(buttonVariants({ size: "lg" }))}>
+              Réserver une livraison
+            </Link>
+          </div>
         </div>
       </section>
 

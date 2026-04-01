@@ -4,7 +4,7 @@ import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { generateQRCodeDataURL } from "@/lib/qr";
-import { sendBookingConfirmation } from "@/lib/email";
+import { sendBookingConfirmation, sendDeliveryConfirmation } from "@/lib/email";
 
 export async function POST(request: Request) {
   const body = await request.text();
@@ -79,18 +79,48 @@ export async function POST(request: Request) {
         if (profile?.email) {
           const qrDataUrl = await generateQRCodeDataURL(booking.qr_code);
 
-          await sendBookingConfirmation({
-            to: profile.email as string,
-            bookingId: booking.id,
-            trailerName: trailer?.name as string,
-            trailerAddress: trailer?.address as string,
-            lockerLabel: locker?.label as string,
-            lockerSize: locker?.size as string,
-            startTime: new Date(booking.start_time).toLocaleString("fr-BE"),
-            endTime: new Date(booking.end_time).toLocaleString("fr-BE"),
-            totalPrice: Number(booking.total_price),
-            qrCodeDataUrl: qrDataUrl,
-          });
+          if (booking.booking_type === "DELIVERY" && booking.delivery_run_id) {
+            // Fetch delivery run for tracking token
+            const { data: deliveryRun } = await supabase
+              .from("delivery_runs")
+              .select("*")
+              .eq("id", booking.delivery_run_id)
+              .single();
+
+            if (deliveryRun) {
+              const trackingUrl = `${process.env.NEXT_PUBLIC_APP_URL}/tracking/${deliveryRun.tracking_token}`;
+
+              await sendDeliveryConfirmation({
+                to: profile.email as string,
+                bookingId: booking.id,
+                trailerName: trailer?.name as string,
+                trailerAddress: trailer?.address as string,
+                lockerLabel: locker?.label as string,
+                lockerSize: locker?.size as string,
+                depositDeadline: booking.deposit_deadline
+                  ? new Date(booking.deposit_deadline).toLocaleString("fr-BE")
+                  : "",
+                scheduledDeparture: new Date(deliveryRun.scheduled_departure).toLocaleString("fr-BE"),
+                destinationAddress: deliveryRun.destination_address,
+                totalPrice: Number(booking.total_price),
+                trackingUrl,
+                qrCodeDataUrl: qrDataUrl,
+              });
+            }
+          } else {
+            await sendBookingConfirmation({
+              to: profile.email as string,
+              bookingId: booking.id,
+              trailerName: trailer?.name as string,
+              trailerAddress: trailer?.address as string,
+              lockerLabel: locker?.label as string,
+              lockerSize: locker?.size as string,
+              startTime: new Date(booking.start_time).toLocaleString("fr-BE"),
+              endTime: new Date(booking.end_time).toLocaleString("fr-BE"),
+              totalPrice: Number(booking.total_price),
+              qrCodeDataUrl: qrDataUrl,
+            });
+          }
         }
       } catch (emailError) {
         console.error("Failed to send confirmation email:", emailError);

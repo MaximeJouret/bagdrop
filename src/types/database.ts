@@ -8,6 +8,14 @@ export type BookingStatus =
   | "CANCELLED";
 export type PaymentStatus = "PENDING" | "PAID" | "REFUNDED" | "FAILED";
 export type UserRole = "USER" | "ADMIN";
+export type BookingType = "STORAGE" | "DELIVERY";
+export type DeliveryStatus =
+  | "SCHEDULED"
+  | "LOADING"
+  | "IN_TRANSIT"
+  | "ARRIVED"
+  | "COMPLETED"
+  | "CANCELLED";
 
 export interface Database {
   public: {
@@ -127,6 +135,9 @@ export interface Database {
           payment_status: PaymentStatus;
           stripe_session_id: string | null;
           stripe_payment_intent_id: string | null;
+          booking_type: BookingType;
+          delivery_run_id: string | null;
+          deposit_deadline: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -142,6 +153,9 @@ export interface Database {
           payment_status?: PaymentStatus;
           stripe_session_id?: string | null;
           stripe_payment_intent_id?: string | null;
+          booking_type?: BookingType;
+          delivery_run_id?: string | null;
+          deposit_deadline?: string | null;
         };
         Update: {
           status?: BookingStatus;
@@ -150,6 +164,9 @@ export interface Database {
           payment_status?: PaymentStatus;
           stripe_session_id?: string | null;
           stripe_payment_intent_id?: string | null;
+          booking_type?: BookingType;
+          delivery_run_id?: string | null;
+          deposit_deadline?: string | null;
         };
         Relationships: [
           {
@@ -166,7 +183,99 @@ export interface Database {
             referencedRelation: "profiles";
             referencedColumns: ["id"];
           },
+          {
+            foreignKeyName: "bookings_delivery_run_id_fkey";
+            columns: ["delivery_run_id"];
+            isOneToOne: false;
+            referencedRelation: "delivery_runs";
+            referencedColumns: ["id"];
+          },
         ];
+      };
+      delivery_runs: {
+        Row: {
+          id: string;
+          trailer_id: string;
+          status: DeliveryStatus;
+          scheduled_departure: string;
+          actual_departure: string | null;
+          estimated_arrival: string | null;
+          actual_arrival: string | null;
+          current_lat: number | null;
+          current_lng: number | null;
+          gps_updated_at: string | null;
+          destination_lat: number;
+          destination_lng: number;
+          destination_address: string;
+          tracking_token: string;
+          driver_id: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          trailer_id: string;
+          status?: DeliveryStatus;
+          scheduled_departure: string;
+          actual_departure?: string | null;
+          estimated_arrival?: string | null;
+          actual_arrival?: string | null;
+          current_lat?: number | null;
+          current_lng?: number | null;
+          gps_updated_at?: string | null;
+          destination_lat?: number;
+          destination_lng?: number;
+          destination_address?: string;
+          tracking_token?: string;
+          driver_id?: string | null;
+        };
+        Update: {
+          status?: DeliveryStatus;
+          scheduled_departure?: string;
+          actual_departure?: string | null;
+          estimated_arrival?: string | null;
+          actual_arrival?: string | null;
+          current_lat?: number | null;
+          current_lng?: number | null;
+          gps_updated_at?: string | null;
+          driver_id?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "delivery_runs_trailer_id_fkey";
+            columns: ["trailer_id"];
+            isOneToOne: false;
+            referencedRelation: "trailers";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "delivery_runs_driver_id_fkey";
+            columns: ["driver_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      delivery_prices: {
+        Row: {
+          id: string;
+          locker_size: LockerSize;
+          price: number;
+          active: boolean;
+        };
+        Insert: {
+          id?: string;
+          locker_size: LockerSize;
+          price: number;
+          active?: boolean;
+        };
+        Update: {
+          locker_size?: LockerSize;
+          price?: number;
+          active?: boolean;
+        };
+        Relationships: [];
       };
     };
     Views: {
@@ -181,6 +290,8 @@ export interface Database {
       booking_status: BookingStatus;
       payment_status: PaymentStatus;
       user_role: UserRole;
+      booking_type: BookingType;
+      delivery_status: DeliveryStatus;
     };
     CompositeTypes: {
       [_ in never]: never;
