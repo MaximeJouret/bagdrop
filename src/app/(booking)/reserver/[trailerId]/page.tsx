@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { MapPin, Clock } from "lucide-react";
 import { LockerPicker } from "@/components/booking/locker-picker";
 
@@ -9,14 +9,40 @@ interface Props {
 
 export default async function ReserverPage({ params }: Props) {
   const { trailerId } = await params;
-  const supabase = await createClient();
 
-  const { data: trailer } = await supabase
+  // Ensure Supabase is configured
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    return (
+      <div className="text-center py-20">
+        <h1 className="text-2xl font-bold mb-4">Configuration en cours</h1>
+        <p className="text-muted-foreground">Le service de réservation sera bientôt disponible.</p>
+      </div>
+    );
+  }
+
+  let supabase;
+  try {
+    supabase = await createClient();
+  } catch (error) {
+    console.error("Failed to create Supabase client:", error);
+    return (
+      <div className="text-center py-20">
+        <h1 className="text-2xl font-bold mb-4">Erreur de connexion</h1>
+        <p className="text-muted-foreground">Impossible de se connecter au service. Veuillez réessayer.</p>
+      </div>
+    );
+  }
+
+  const { data: trailer, error: trailerError } = await supabase
     .from("trailers")
     .select("*")
     .eq("id", trailerId)
     .eq("active", true)
     .single();
+
+  if (trailerError) {
+    console.error("Trailer query error:", trailerError);
+  }
 
   if (!trailer) notFound();
 
