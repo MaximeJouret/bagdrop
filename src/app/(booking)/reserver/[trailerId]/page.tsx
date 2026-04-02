@@ -1,5 +1,5 @@
-import { createClient } from "@/lib/supabase/server";
-import { notFound, redirect } from "next/navigation";
+import { createReadOnlyClient } from "@/lib/supabase/server";
+import { notFound } from "next/navigation";
 import { MapPin, Clock } from "lucide-react";
 import { LockerPicker } from "@/components/booking/locker-picker";
 
@@ -20,18 +20,7 @@ export default async function ReserverPage({ params }: Props) {
     );
   }
 
-  let supabase;
-  try {
-    supabase = await createClient();
-  } catch (error) {
-    console.error("Failed to create Supabase client:", error);
-    return (
-      <div className="text-center py-20">
-        <h1 className="text-2xl font-bold mb-4">Erreur de connexion</h1>
-        <p className="text-muted-foreground">Impossible de se connecter au service. Veuillez réessayer.</p>
-      </div>
-    );
-  }
+  const supabase = createReadOnlyClient();
 
   const { data: trailer, error: trailerError } = await supabase
     .from("trailers")

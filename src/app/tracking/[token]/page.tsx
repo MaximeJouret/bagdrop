@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createReadOnlyClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import { TrackingView } from "@/components/tracking/tracking-map";
 
@@ -8,7 +8,7 @@ interface Props {
 
 export default async function TrackingPage({ params }: Props) {
   const { token } = await params;
-  const supabase = await createClient();
+  const supabase = createReadOnlyClient();
 
   const { data: run } = await supabase
     .from("delivery_runs")
