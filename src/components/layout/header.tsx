@@ -8,8 +8,9 @@ import { cn } from "@/lib/utils";
 
 const navigation = [
   { name: "Accueil", href: "/" },
-  { name: "Comment ça marche", href: "/#how-it-works" },
-  { name: "Tarifs", href: "/#pricing" },
+  { name: "Emplacements", href: "/#emplacements" },
+  { name: "Comment ca marche", href: "/#comment-ca-marche" },
+  { name: "Tarifs", href: "/#tarifs" },
 ];
 
 export function Header() {
@@ -45,7 +46,11 @@ export function Header() {
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Menu"
         >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {mobileOpen ? (
+            <X className="h-5 w-5" />
+          ) : (
+            <Menu className="h-5 w-5" />
+          )}
         </button>
       </div>
 
