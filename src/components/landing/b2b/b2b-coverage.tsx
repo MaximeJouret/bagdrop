@@ -1,4 +1,4 @@
-import { Plane, MapPin } from "lucide-react";
+import { Plane } from "lucide-react";
 
 const airports = [
   {
@@ -22,96 +22,102 @@ const airports = [
 ];
 
 const zones = [
-  "Centre historique (Grand-Place, Sablon)",
-  "Quartier européen (Schuman, Luxembourg)",
-  "Louise / Avenue Louise",
-  "Quartier Nord / Gare du Midi",
-  "Saint-Gilles / Châtelain",
-  "Tour & Taxis / Canal",
+  "Centre historique · Grand-Place, Sablon",
+  "Quartier européen · Schuman, Luxembourg",
+  "Louise · Avenue Louise",
+  "Quartier Nord · Gare du Midi",
+  "Saint-Gilles · Châtelain",
+  "Tour & Taxis · Canal",
 ];
 
 export function B2BCoverage() {
   return (
-    <section id="couverture" className="py-20 md:py-24 px-4 bg-background">
+    <section
+      id="couverture"
+      className="py-24 md:py-32 px-6 bg-[var(--brand-cream)] dark:bg-muted/20"
+    >
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <p className="text-xs font-mono tracking-widest uppercase text-primary mb-3">
-            Zone de service
+        <div className="mb-16 lg:mb-20 max-w-3xl">
+          <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-coral)] mb-6">
+            ◇ Zone de service
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--brand-charcoal)] dark:text-foreground mb-4">
-            Tout Bruxelles, deux aéroports
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter text-[var(--brand-ink)] dark:text-foreground leading-[1.05]">
+            Tout Bruxelles,
+            <br />
+            <span className="italic font-light text-[var(--brand-emerald)]">
+              deux aéroports.
+            </span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Une couverture pensée pour les hôtels du centre et du quartier
-            européen, avec deux destinations aéroportuaires.
-          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
+        <div className="grid lg:grid-cols-2 gap-px bg-border rounded-2xl overflow-hidden border border-border mb-px">
           {airports.map((airport) => (
-            <div
+            <article
               key={airport.code}
-              className={`relative rounded-2xl border p-7 ${
-                airport.primary
-                  ? "border-primary/30 bg-[var(--brand-cream)]/30"
-                  : "border-border/50 bg-background"
-              }`}
+              className="bg-card p-10 md:p-12"
             >
-              <div className="flex items-start justify-between mb-6">
+              <div className="flex items-start justify-between mb-10">
                 <div>
-                  <span className="text-xs font-mono tracking-widest text-muted-foreground uppercase">
-                    {airport.code}
+                  <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-[var(--brand-coral)]">
+                    Aéroport · {airport.code}
                   </span>
-                  <h3 className="text-2xl font-bold text-[var(--brand-charcoal)] dark:text-foreground mt-1">
+                  <h3 className="text-3xl md:text-4xl font-semibold tracking-tight text-[var(--brand-ink)] dark:text-foreground mt-3">
                     {airport.name}
                   </h3>
-                  <p className="text-sm text-muted-foreground">{airport.city}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {airport.city}
+                  </p>
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Plane className="h-5 w-5 text-primary" />
-                </div>
+                <Plane
+                  strokeWidth={1.25}
+                  className={`h-7 w-7 ${
+                    airport.primary
+                      ? "text-[var(--brand-emerald)]"
+                      : "text-muted-foreground"
+                  }`}
+                />
               </div>
-              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-border/50">
-                <div>
-                  <p className="text-xs text-muted-foreground mb-1">Distance</p>
-                  <p className="font-mono font-semibold">{airport.distance}</p>
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground mb-1">Trajet</p>
-                  <p className="font-mono font-semibold">{airport.duration}</p>
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground mb-1">Trafic</p>
-                  <p className="font-mono font-semibold">{airport.passengers}</p>
-                </div>
+              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border">
+                <Metric label="Distance" value={airport.distance} />
+                <Metric label="Trajet" value={airport.duration} />
+                <Metric label="Trafic" value={airport.passengers} />
               </div>
-            </div>
+            </article>
           ))}
         </div>
 
-        <div className="rounded-2xl border border-border/50 bg-background p-7">
-          <div className="flex items-center gap-3 mb-5">
-            <MapPin className="h-5 w-5 text-primary" />
-            <h3 className="font-semibold text-lg text-[var(--brand-charcoal)] dark:text-foreground">
-              Zones de collecte couvertes
-            </h3>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="bg-card border border-border border-t-0 rounded-b-2xl p-10 md:p-12">
+          <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-[var(--brand-coral)] mb-5">
+            Zones de collecte
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3">
             {zones.map((zone) => (
-              <div
+              <p
                 key={zone}
-                className="flex items-center gap-2 text-sm text-muted-foreground"
+                className="text-sm text-foreground border-b border-border pb-3"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                 {zone}
-              </div>
+              </p>
             ))}
           </div>
-          <p className="text-xs text-muted-foreground/70 mt-5 pt-5 border-t border-border/50 italic">
+          <p className="text-xs text-muted-foreground/70 mt-6 italic">
             Hors zone ? Contactez-nous pour évaluer la faisabilité.
           </p>
         </div>
       </div>
     </section>
+  );
+}
+
+function Metric({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-2">
+        {label}
+      </p>
+      <p className="font-mono text-base font-semibold text-foreground">
+        {value}
+      </p>
+    </div>
   );
 }

@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
@@ -19,7 +18,7 @@ const faqs = [
   },
   {
     q: "Quel volume minimum est requis ?",
-    a: "Aucun minimum sur la formule Boutique. Pour la formule Premium, nous recommandons un volume cible de 30 réservations/mois pour rentabiliser l'account manager dédié — mais ce seuil est indicatif, pas contractuel.",
+    a: "Aucun minimum sur la formule Boutique. Pour la formule Premium, nous recommandons un volume cible de 30 réservations par mois pour rentabiliser l'account manager dédié — mais ce seuil est indicatif, pas contractuel.",
   },
   {
     q: "Comment sont versées les commissions ?",
@@ -27,14 +26,14 @@ const faqs = [
   },
   {
     q: "Pouvez-vous gérer les pics de saisonnalité ?",
-    a: "Notre flotte est dimensionnée pour absorber les pics (avril-juin, septembre-octobre, fêtes de fin d'année). Engagement contractuel : aucune réservation refusée pour cause de capacité, sauf demande de dernière minute (< 2h avant).",
+    a: "Notre flotte est dimensionnée pour absorber les pics (avril-juin, septembre-octobre, fêtes de fin d'année). Engagement contractuel : aucune réservation refusée pour cause de capacité, sauf demande de dernière minute (moins de 2h avant).",
   },
   {
     q: "Le service fonctionne-t-il pour Brussels Airport et Charleroi ?",
     a: "Oui, les deux sont couverts. Pricing différencié pour Charleroi (distance plus importante). Pour les correspondances internationales, prévoyez T-3h minimum avant l'heure d'embarquement, T-4h pour Charleroi.",
   },
   {
-    q: "Comment intégrez-vous avec notre PMS (Mews, Opera, Cloudbeds...) ?",
+    q: "Comment intégrez-vous avec notre PMS (Mews, Opera, Cloudbeds) ?",
     a: "API REST disponible sur la formule Premium. Intégrations natives prêtes pour Mews et Cloudbeds, en cours de développement pour Opera Cloud. Sur Boutique, la tablette dédiée fonctionne en autonomie sans intégration PMS.",
   },
 ];
@@ -43,45 +42,50 @@ export function B2BFAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-20 md:py-24 px-4 bg-[var(--brand-cream)] dark:bg-muted/20">
-      <div className="container mx-auto max-w-3xl">
-        <div className="text-center mb-12">
-          <p className="text-xs font-mono tracking-widest uppercase text-primary mb-3">
-            Questions fréquentes
+    <section id="faq" className="py-24 md:py-32 px-6 bg-background">
+      <div className="container mx-auto max-w-4xl">
+        <div className="mb-16">
+          <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-coral)] mb-6">
+            ◇ Questions fréquentes
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--brand-charcoal)] dark:text-foreground mb-4">
-            Tout ce que votre direction veut savoir
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter text-[var(--brand-ink)] dark:text-foreground leading-[1.05]">
+            Tout ce que votre direction
+            <br />
+            <span className="italic font-light text-muted-foreground">
+              veut savoir.
+            </span>
           </h2>
         </div>
 
-        <div className="space-y-3">
-          {faqs.map((faq, i) => (
-            <div
-              key={i}
-              className="rounded-xl border border-border/50 bg-background overflow-hidden"
-            >
-              <button
-                onClick={() => setOpen(open === i ? null : i)}
-                className="w-full flex items-center justify-between p-5 text-left hover:bg-[var(--brand-cream)]/40 transition-colors"
-                aria-expanded={open === i}
-              >
-                <span className="font-medium text-[var(--brand-charcoal)] dark:text-foreground pr-6">
-                  {faq.q}
-                </span>
-                <ChevronDown
-                  className={cn(
-                    "h-5 w-5 text-muted-foreground shrink-0 transition-transform duration-200",
-                    open === i && "rotate-180"
-                  )}
-                />
-              </button>
-              {open === i && (
-                <div className="px-5 pb-5 text-sm text-muted-foreground leading-relaxed border-t border-border/50 pt-4">
-                  {faq.a}
-                </div>
-              )}
-            </div>
-          ))}
+        <div className="border-t border-border">
+          {faqs.map((faq, i) => {
+            const isOpen = open === i;
+            return (
+              <div key={i} className="border-b border-border">
+                <button
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="w-full flex items-center justify-between gap-6 py-6 text-left group"
+                  aria-expanded={isOpen}
+                >
+                  <span className="text-base md:text-lg font-medium text-[var(--brand-ink)] dark:text-foreground group-hover:text-[var(--brand-emerald)] transition-colors">
+                    {faq.q}
+                  </span>
+                  <span className="shrink-0 w-8 h-8 rounded-full border border-border flex items-center justify-center group-hover:border-[var(--brand-emerald)] group-hover:bg-[var(--brand-emerald)] transition-all">
+                    {isOpen ? (
+                      <Minus className="h-3.5 w-3.5 text-[var(--brand-emerald)] group-hover:text-[var(--brand-ivory)]" />
+                    ) : (
+                      <Plus className="h-3.5 w-3.5 text-foreground group-hover:text-[var(--brand-ivory)]" />
+                    )}
+                  </span>
+                </button>
+                {isOpen && (
+                  <div className="pb-6 text-base text-muted-foreground leading-relaxed pr-14 max-w-3xl">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

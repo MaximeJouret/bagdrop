@@ -1,145 +1,159 @@
 "use client";
 
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { buttonVariants } from "@/components/ui/button-variants";
-import { cn } from "@/lib/utils";
-import { CheckCircle2, Send } from "lucide-react";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 
 export function B2BPartnerForm() {
   const [submitted, setSubmitted] = useState(false);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // Demo submission - would POST to /api/partners in production
     setSubmitted(true);
   }
 
   return (
     <section
       id="partenariat"
-      className="py-20 md:py-24 px-4 bg-background"
+      className="py-24 md:py-32 px-6 bg-[var(--brand-cream)] dark:bg-muted/20"
     >
-      <div className="container mx-auto max-w-5xl">
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Left: pitch */}
-          <div>
-            <p className="text-xs font-mono tracking-widest uppercase text-primary mb-3">
-              Démarrer
+      <div className="container mx-auto max-w-6xl">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-20 items-start">
+          {/* Left — pitch */}
+          <div className="lg:col-span-5">
+            <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-coral)] mb-6">
+              ◇ Démarrer
             </p>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--brand-charcoal)] dark:text-foreground mb-5">
-              Quinze minutes pour
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter text-[var(--brand-ink)] dark:text-foreground leading-[1.05] mb-8">
+              Quinze minutes
               <br />
-              <span className="text-primary">transformer votre conciergerie.</span>
+              <span className="italic font-light text-[var(--brand-emerald)]">
+                pour transformer
+              </span>
+              <br />
+              votre conciergerie.
             </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
+            <p className="text-lg text-muted-foreground leading-relaxed mb-10">
               Laissez-nous vos coordonnées. Un de nos cofondateurs vous
               recontacte sous 24h pour un appel de cadrage. Pas de commercial
               agressif, pas de force de vente.
             </p>
 
-            <div className="space-y-4 pt-6 border-t border-border/50">
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <div>
-                  <p className="font-medium text-[var(--brand-charcoal)] dark:text-foreground">
-                    Période d'essai sans engagement
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    30 jours pour évaluer le service avec votre équipe.
-                  </p>
+            <div className="space-y-5">
+              {[
+                {
+                  t: "Période d'essai sans engagement",
+                  d: "30 jours pour évaluer le service avec votre équipe.",
+                },
+                {
+                  t: "Mise en place en 72h",
+                  d: "De la signature à la première collecte effective.",
+                },
+                {
+                  t: "Aucun coût d'entrée",
+                  d: "Tablette, formation, support : tout est inclus.",
+                },
+              ].map((item) => (
+                <div key={item.t} className="flex items-start gap-4">
+                  <CheckCircle2
+                    strokeWidth={1.5}
+                    className="h-5 w-5 text-[var(--brand-emerald)] shrink-0 mt-0.5"
+                  />
+                  <div>
+                    <p className="font-medium text-[var(--brand-ink)] dark:text-foreground">
+                      {item.t}
+                    </p>
+                    <p className="text-sm text-muted-foreground">{item.d}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <div>
-                  <p className="font-medium text-[var(--brand-charcoal)] dark:text-foreground">
-                    Mise en place en 72h
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    De la signature à la première collecte effective.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <div>
-                  <p className="font-medium text-[var(--brand-charcoal)] dark:text-foreground">
-                    Aucun coût d'entrée
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Tablette, formation, support : tout est inclus.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* Right: form */}
-          <Card className="border-border/50 shadow-lg">
-            <CardContent className="p-7">
+          {/* Right — form */}
+          <div className="lg:col-span-7">
+            <div className="bg-card border border-border rounded-2xl p-8 md:p-10">
               {submitted ? (
-                <div className="text-center py-12">
-                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
-                    <CheckCircle2 className="h-7 w-7 text-primary" />
+                <div className="text-center py-16">
+                  <div className="w-14 h-14 rounded-full bg-[var(--brand-emerald)]/10 flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle2
+                      strokeWidth={1.5}
+                      className="h-7 w-7 text-[var(--brand-emerald)]"
+                    />
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-[var(--brand-charcoal)] dark:text-foreground">
+                  <h3 className="text-2xl font-semibold tracking-tight mb-3 text-[var(--brand-ink)] dark:text-foreground">
                     Demande reçue
                   </h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-muted-foreground max-w-md mx-auto">
                     Un membre de l'équipe BagDrop vous contacte sous 24h
                     ouvrées.
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid sm:grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="grid sm:grid-cols-2 gap-5">
                     <div>
-                      <Label htmlFor="firstName" className="mb-1.5">
+                      <Label htmlFor="firstName" className="mb-1.5 text-xs font-mono uppercase tracking-widest text-muted-foreground">
                         Prénom
                       </Label>
-                      <Input id="firstName" required placeholder="Sophie" />
+                      <Input
+                        id="firstName"
+                        required
+                        placeholder="Sophie"
+                        className="h-11 rounded-lg"
+                      />
                     </div>
                     <div>
-                      <Label htmlFor="lastName" className="mb-1.5">
+                      <Label htmlFor="lastName" className="mb-1.5 text-xs font-mono uppercase tracking-widest text-muted-foreground">
                         Nom
                       </Label>
-                      <Input id="lastName" required placeholder="Lambert" />
+                      <Input
+                        id="lastName"
+                        required
+                        placeholder="Lambert"
+                        className="h-11 rounded-lg"
+                      />
                     </div>
                   </div>
                   <div>
-                    <Label htmlFor="hotel" className="mb-1.5">
+                    <Label htmlFor="hotel" className="mb-1.5 text-xs font-mono uppercase tracking-widest text-muted-foreground">
                       Établissement
                     </Label>
                     <Input
                       id="hotel"
                       required
                       placeholder="Hotel Métropole Bruxelles"
+                      className="h-11 rounded-lg"
                     />
                   </div>
-                  <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="grid sm:grid-cols-2 gap-5">
                     <div>
-                      <Label htmlFor="role" className="mb-1.5">
+                      <Label htmlFor="role" className="mb-1.5 text-xs font-mono uppercase tracking-widest text-muted-foreground">
                         Fonction
                       </Label>
                       <Input
                         id="role"
                         required
                         placeholder="Directeur d'hébergement"
+                        className="h-11 rounded-lg"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="rooms" className="mb-1.5">
-                        Nombre de chambres
+                      <Label htmlFor="rooms" className="mb-1.5 text-xs font-mono uppercase tracking-widest text-muted-foreground">
+                        Chambres
                       </Label>
-                      <Input id="rooms" type="number" placeholder="120" />
+                      <Input
+                        id="rooms"
+                        type="number"
+                        placeholder="120"
+                        className="h-11 rounded-lg"
+                      />
                     </div>
                   </div>
                   <div>
-                    <Label htmlFor="email" className="mb-1.5">
+                    <Label htmlFor="email" className="mb-1.5 text-xs font-mono uppercase tracking-widest text-muted-foreground">
                       Email professionnel
                     </Label>
                     <Input
@@ -147,35 +161,34 @@ export function B2BPartnerForm() {
                       type="email"
                       required
                       placeholder="sophie.lambert@hotel.be"
+                      className="h-11 rounded-lg"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="message" className="mb-1.5">
+                    <Label htmlFor="message" className="mb-1.5 text-xs font-mono uppercase tracking-widest text-muted-foreground">
                       Message (optionnel)
                     </Label>
                     <Textarea
                       id="message"
                       rows={3}
                       placeholder="Volume estimé, horaires de réception, particularités..."
+                      className="rounded-lg"
                     />
                   </div>
                   <button
                     type="submit"
-                    className={cn(
-                      buttonVariants({ size: "lg" }),
-                      "w-full mt-2 group"
-                    )}
+                    className="inline-flex items-center justify-center w-full h-12 px-6 rounded-full text-base font-medium bg-[var(--brand-ink)] text-[var(--brand-ivory)] hover:bg-[var(--brand-emerald)] transition-colors group mt-2"
                   >
                     Demander un appel de cadrage
-                    <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </button>
-                  <p className="text-xs text-muted-foreground text-center pt-2">
+                  <p className="text-xs text-muted-foreground text-center">
                     Vos données restent confidentielles. Pas de spam, jamais.
                   </p>
                 </form>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
     </section>

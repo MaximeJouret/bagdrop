@@ -1,4 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { PackageX, Clock, Star } from "lucide-react";
 
 const painPoints = [
@@ -27,50 +26,56 @@ const painPoints = [
 
 export function B2BPainPoints() {
   return (
-    <section className="py-20 md:py-24 px-4 bg-background">
+    <section className="py-24 md:py-32 px-6 bg-background">
       <div className="container mx-auto max-w-6xl">
-        <div className="max-w-2xl mb-16">
-          <p className="text-xs font-mono tracking-widest uppercase text-primary mb-3">
-            Le problème
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--brand-charcoal)] dark:text-foreground mb-4">
-            Les bagages, l'angle mort
-            <br />
-            <span className="text-muted-foreground">
+        <div className="grid lg:grid-cols-12 gap-10 mb-16 lg:mb-20">
+          <div className="lg:col-span-5">
+            <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-coral)] mb-6">
+              ◇ Le problème
+            </p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter text-[var(--brand-ink)] dark:text-foreground leading-[1.05]">
+              Les bagages,
+              <br />
+              <span className="italic font-light text-muted-foreground">
+                l'angle mort
+              </span>
+              <br />
               de la fin de séjour.
-            </span>
-          </h2>
-          <p className="text-muted-foreground text-lg leading-relaxed">
-            Chaque jour, vos clients quittent leur chambre en milieu de matinée
-            pour un vol en fin de journée. Entre les deux, leurs bagages
-            deviennent votre problème.
-          </p>
+            </h2>
+          </div>
+          <div className="lg:col-span-6 lg:col-start-7 flex items-end">
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
+              Chaque jour, vos clients quittent leur chambre en milieu de
+              matinée pour un vol en fin de journée. Entre les deux, leurs
+              bagages deviennent <span className="text-foreground font-medium">votre</span> problème.
+            </p>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-px bg-border rounded-2xl overflow-hidden border border-border">
           {painPoints.map((point, i) => (
-            <Card
+            <article
               key={point.problem}
-              className="relative overflow-hidden border-border/50 hover:border-primary/30 transition-colors"
+              className="bg-card p-8 md:p-10 flex flex-col group"
             >
-              <CardContent className="p-7">
-                <span className="absolute top-4 right-4 text-xs font-mono text-muted-foreground/40">
-                  0{i + 1}
-                </span>
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-5">
-                  <point.icon className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-[var(--brand-charcoal)] dark:text-foreground">
-                  {point.problem}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                  {point.description}
-                </p>
-                <p className="text-sm font-medium text-primary border-t border-border/50 pt-4">
-                  → {point.solution}
-                </p>
-              </CardContent>
-            </Card>
+              <span className="text-xs font-mono text-[var(--brand-coral)] mb-8">
+                0{i + 1} / 03
+              </span>
+              <point.icon
+                strokeWidth={1.5}
+                className="h-7 w-7 text-[var(--brand-emerald)] mb-6"
+              />
+              <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-[var(--brand-ink)] dark:text-foreground mb-4 leading-tight">
+                {point.problem}
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-8 flex-1">
+                {point.description}
+              </p>
+              <p className="text-sm font-medium text-[var(--brand-emerald)] border-t border-border pt-5 flex items-center gap-2">
+                <span className="text-[var(--brand-coral)]">→</span>
+                {point.solution}
+              </p>
+            </article>
           ))}
         </div>
       </div>

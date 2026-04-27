@@ -38,55 +38,52 @@ const steps = [
 export function B2BHowItWorks() {
   return (
     <section
-      id="comment-ca-marche"
-      className="py-20 md:py-24 px-4 bg-[var(--brand-cream)] dark:bg-muted/20"
+      id="processus"
+      className="py-24 md:py-32 px-6 bg-[var(--brand-cream)] dark:bg-muted/20"
     >
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <p className="text-xs font-mono tracking-widest uppercase text-primary mb-3">
-            Le processus
+        <div className="mb-16 lg:mb-20 max-w-3xl">
+          <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-coral)] mb-6">
+            ◇ Le processus
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--brand-charcoal)] dark:text-foreground mb-4">
-            Comment ça marche
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter text-[var(--brand-ink)] dark:text-foreground leading-[1.05] mb-6">
+            Quatre étapes,
+            <br />
+            <span className="italic font-light text-[var(--brand-emerald)]">
+              zéro friction.
+            </span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Une opération simple, intégrée à votre flux quotidien. Aucun
-            matériel à installer, aucune formation requise.
+          <p className="text-lg text-muted-foreground max-w-xl">
+            Une opération intégrée à votre flux quotidien. Aucun matériel à
+            installer, aucune formation longue, aucune complexité.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
-          {steps.map((step, i) => (
-            <div key={step.num} className="relative">
-              {/* Step card */}
-              <div className="bg-background rounded-2xl border border-border/50 p-6 h-full hover:shadow-md transition-shadow">
-                <div className="flex items-start justify-between mb-5">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <step.icon className="h-5 w-5 text-primary" />
-                  </div>
-                  <span className="text-3xl font-bold font-mono text-primary/20">
-                    {step.num}
-                  </span>
-                </div>
-                <h3 className="font-semibold text-lg mb-2 text-[var(--brand-charcoal)] dark:text-foreground">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                  {step.description}
-                </p>
-                <p className="text-xs font-mono uppercase tracking-wider text-primary border-t border-border/50 pt-3">
-                  {step.timing}
-                </p>
-              </div>
-
-              {/* Connector arrow */}
-              {i < steps.length - 1 && (
-                <div
-                  className="hidden lg:block absolute top-1/2 -right-2 w-4 h-px bg-border z-0"
-                  aria-hidden="true"
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden border border-border">
+          {steps.map((step) => (
+            <article
+              key={step.num}
+              className="bg-card p-8 flex flex-col h-full relative"
+            >
+              <div className="flex items-baseline justify-between mb-10">
+                <span className="text-7xl font-semibold font-mono text-[var(--brand-emerald)]/15 leading-none tracking-tighter">
+                  {step.num}
+                </span>
+                <step.icon
+                  strokeWidth={1.5}
+                  className="h-6 w-6 text-[var(--brand-emerald)]"
                 />
-              )}
-            </div>
+              </div>
+              <h3 className="font-semibold text-xl tracking-tight text-[var(--brand-ink)] dark:text-foreground mb-3 leading-tight">
+                {step.title}
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-8 flex-1">
+                {step.description}
+              </p>
+              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--brand-coral)] border-t border-border pt-5">
+                {step.timing}
+              </p>
+            </article>
           ))}
         </div>
       </div>

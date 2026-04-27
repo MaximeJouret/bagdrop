@@ -3,12 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X, Luggage } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button-variants";
-import { cn } from "@/lib/utils";
+import { Menu, X, ArrowRight } from "lucide-react";
 
 const b2bNav = [
-  { name: "Notre service", href: "/#comment-ca-marche" },
+  { name: "Processus", href: "/#processus" },
   { name: "Couverture", href: "/#couverture" },
   { name: "Tarifs", href: "/#tarifs" },
   { name: "FAQ", href: "/#faq" },
@@ -24,7 +22,6 @@ export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Determine context: B2C on /voyageurs, B2B everywhere else
   const isB2C = pathname?.startsWith("/voyageurs");
   const navigation = isB2C ? b2cNav : b2bNav;
   const switchHref = isB2C ? "/" : "/voyageurs";
@@ -33,44 +30,51 @@ export function Header() {
   const ctaLabel = isB2C ? "Réserver" : "Devenir partenaire";
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2 font-bold text-xl">
-          <Luggage className="h-6 w-6 text-primary" />
-          <span>BagDrop</span>
-          <span className="hidden sm:inline-block ml-1 text-[10px] font-mono uppercase tracking-widest text-muted-foreground border border-border/50 rounded px-1.5 py-0.5">
+    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/85 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70">
+      <div className="container mx-auto flex h-16 items-center justify-between px-6">
+        <Link
+          href="/"
+          className="flex items-baseline gap-2 group"
+        >
+          <span className="text-xl font-semibold tracking-tighter text-[var(--brand-ink)] dark:text-foreground">
+            BagDrop
+          </span>
+          <span className="hidden sm:inline-block text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground border-l border-border/60 pl-2">
             {isB2C ? "Voyageurs" : "Hôtels"}
           </span>
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-8">
           {navigation.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm text-muted-foreground hover:text-[var(--brand-emerald)] transition-colors"
             >
               {item.name}
             </Link>
           ))}
+        </nav>
+
+        <div className="hidden md:flex items-center gap-4">
           <Link
             href={switchHref}
-            className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors border-l border-border/50 pl-6"
+            className="text-xs font-mono uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors"
           >
             {switchLabel}
           </Link>
           <Link
             href={ctaHref}
-            className={cn(buttonVariants({ size: "sm" }))}
+            className="inline-flex items-center h-9 px-4 rounded-full text-sm font-medium bg-[var(--brand-ink)] text-[var(--brand-ivory)] hover:bg-[var(--brand-emerald)] transition-colors group"
           >
             {ctaLabel}
+            <ArrowRight className="ml-1.5 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
           </Link>
-        </nav>
+        </div>
 
-        {/* Mobile hamburger */}
         <button
-          className="md:hidden p-2"
+          className="md:hidden p-2 -mr-2"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Menu"
         >
@@ -82,14 +86,13 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile nav dropdown */}
       {mobileOpen && (
-        <nav className="md:hidden border-t bg-background px-4 py-4 flex flex-col gap-3">
+        <nav className="md:hidden border-t border-border/60 bg-background px-6 py-6 flex flex-col gap-4">
           {navigation.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="text-base text-foreground hover:text-[var(--brand-emerald)] transition-colors"
               onClick={() => setMobileOpen(false)}
             >
               {item.name}
@@ -97,17 +100,18 @@ export function Header() {
           ))}
           <Link
             href={switchHref}
-            className="text-base font-medium text-primary border-t border-border/50 pt-3 mt-1"
+            className="text-sm font-mono uppercase tracking-[0.15em] text-[var(--brand-emerald)] border-t border-border/60 pt-4 mt-2"
             onClick={() => setMobileOpen(false)}
           >
             → {switchLabel}
           </Link>
           <Link
             href={ctaHref}
-            className={cn(buttonVariants(), "mt-2 w-full justify-center")}
+            className="inline-flex items-center justify-center h-11 px-5 rounded-full text-sm font-medium bg-[var(--brand-ink)] text-[var(--brand-ivory)] mt-2"
             onClick={() => setMobileOpen(false)}
           >
             {ctaLabel}
+            <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
           </Link>
         </nav>
       )}
