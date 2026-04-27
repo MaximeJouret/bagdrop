@@ -1,4 +1,8 @@
+"use client";
+
 import { ShieldCheck, MapPin, Lock, Camera } from "lucide-react";
+import { Reveal } from "@/components/motion/reveal";
+import { StaggerContainer, StaggerItem } from "@/components/motion/text-reveal";
 
 const guarantees = [
   {
@@ -31,30 +35,34 @@ export function B2CTrust() {
   return (
     <section className="py-32 md:py-48 px-6 bg-[var(--brand-cream)] dark:bg-muted/20">
       <div className="container mx-auto max-w-5xl">
-        <div className="text-center mb-20 md:mb-28 max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.025em] text-[var(--brand-ink)] dark:text-foreground leading-[1.1]">
-            Vos bagages valent plus
-            <br />
-            <span className="text-muted-foreground">qu'un trajet en taxi.</span>
-          </h2>
-        </div>
+        <Reveal>
+          <div className="text-center mb-20 md:mb-28 max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.025em] text-[var(--brand-ink)] dark:text-foreground leading-[1.1]">
+              Vos bagages valent plus
+              <br />
+              <span className="text-muted-foreground">qu'un trajet en taxi.</span>
+            </h2>
+          </div>
+        </Reveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-10">
+        <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-10" stagger={0.1}>
           {guarantees.map((g) => (
-            <div key={g.title} className="text-center md:text-left">
-              <g.icon
-                strokeWidth={1.25}
-                className="h-7 w-7 text-[var(--brand-cobalt)] mb-5 mx-auto md:mx-0"
-              />
-              <h3 className="text-lg md:text-xl font-semibold tracking-tight text-[var(--brand-ink)] dark:text-foreground mb-3">
-                {g.title}
-              </h3>
-              <p className="text-base text-muted-foreground leading-relaxed">
-                {g.description}
-              </p>
-            </div>
+            <StaggerItem key={g.title}>
+              <div className="text-center md:text-left">
+                <g.icon
+                  strokeWidth={1.25}
+                  className="h-7 w-7 text-[var(--brand-cobalt)] mb-5 mx-auto md:mx-0"
+                />
+                <h3 className="text-lg md:text-xl font-semibold tracking-tight text-[var(--brand-ink)] dark:text-foreground mb-3">
+                  {g.title}
+                </h3>
+                <p className="text-base text-muted-foreground leading-relaxed">
+                  {g.description}
+                </p>
+              </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
