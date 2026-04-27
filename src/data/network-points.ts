@@ -1,6 +1,20 @@
 /**
+ * ╔══════════════════════════════════════════════════════════════════╗
+ * ║  ⚠️  TODO PRE-LAUNCH — REMPLACER LES HÔTELS PLACEHOLDERS         ║
+ * ║                                                                    ║
+ * ║  Les entrées `type: "hotel"` ci-dessous sont des PLACEHOLDERS.    ║
+ * ║  Quand tu auras tes vrais partenaires hôteliers signés :          ║
+ * ║                                                                    ║
+ * ║    1. Remplace les entrées `type: "hotel"` par tes vrais hôtels.  ║
+ * ║    2. Garde les coordonnées lat/lng EXACTES (Google Maps → clic   ║
+ * ║       droit sur l'adresse → coordonnées en haut du menu).         ║
+ * ║    3. C'est tout. La carte se met à jour automatiquement sur les  ║
+ * ║       deux pages (B2B et B2C).                                    ║
+ * ║                                                                    ║
+ * ║  Ne touche PAS aux entrées `type: "airport"`.                     ║
+ * ╚══════════════════════════════════════════════════════════════════╝
+ *
  * Network of partner hotels + airports for the coverage map.
- * Hotels are placeholders for v0 — to be replaced with real partners.
  */
 
 export type NetworkPoint = {
