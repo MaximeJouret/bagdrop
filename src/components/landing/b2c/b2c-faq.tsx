@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
@@ -43,45 +42,49 @@ export function B2CFAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-20 md:py-24 px-4 bg-background">
-      <div className="container mx-auto max-w-3xl">
-        <div className="text-center mb-12">
-          <p className="text-xs font-mono tracking-widest uppercase text-primary mb-3">
+    <section id="faq" className="py-24 md:py-32 px-6 bg-background">
+      <div className="container mx-auto max-w-4xl">
+        <div className="mb-16">
+          <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-cobalt)] mb-6 flex items-center gap-3">
+            <span className="w-8 h-px bg-[var(--brand-cobalt)]" />
             Questions fréquentes
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--brand-charcoal)] dark:text-foreground mb-4">
-            Tout ce que vous voulez savoir
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.04em] text-[var(--brand-ink)] dark:text-foreground leading-[1.02]">
+            Tout ce que vous voulez
+            <br />
+            <span className="text-muted-foreground">savoir.</span>
           </h2>
         </div>
 
-        <div className="space-y-3">
-          {faqs.map((faq, i) => (
-            <div
-              key={i}
-              className="rounded-xl border border-border/50 bg-[var(--brand-cream)]/30 overflow-hidden"
-            >
-              <button
-                onClick={() => setOpen(open === i ? null : i)}
-                className="w-full flex items-center justify-between p-5 text-left hover:bg-[var(--brand-cream)]/60 transition-colors"
-                aria-expanded={open === i}
-              >
-                <span className="font-medium text-[var(--brand-charcoal)] dark:text-foreground pr-6">
-                  {faq.q}
-                </span>
-                <ChevronDown
-                  className={cn(
-                    "h-5 w-5 text-muted-foreground shrink-0 transition-transform duration-200",
-                    open === i && "rotate-180"
-                  )}
-                />
-              </button>
-              {open === i && (
-                <div className="px-5 pb-5 text-sm text-muted-foreground leading-relaxed border-t border-border/50 pt-4">
-                  {faq.a}
-                </div>
-              )}
-            </div>
-          ))}
+        <div className="border-t border-border">
+          {faqs.map((faq, i) => {
+            const isOpen = open === i;
+            return (
+              <div key={i} className="border-b border-border">
+                <button
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="w-full flex items-center justify-between gap-6 py-6 text-left group"
+                  aria-expanded={isOpen}
+                >
+                  <span className="text-base md:text-lg font-semibold text-[var(--brand-ink)] dark:text-foreground group-hover:text-[var(--brand-cobalt)] transition-colors">
+                    {faq.q}
+                  </span>
+                  <span className="shrink-0 w-9 h-9 rounded-full border border-border flex items-center justify-center group-hover:border-[var(--brand-cobalt)] group-hover:bg-[var(--brand-cobalt)] transition-all">
+                    {isOpen ? (
+                      <Minus className="h-3.5 w-3.5 text-[var(--brand-cobalt)] group-hover:text-white" />
+                    ) : (
+                      <Plus className="h-3.5 w-3.5 text-foreground group-hover:text-white" />
+                    )}
+                  </span>
+                </button>
+                {isOpen && (
+                  <div className="pb-6 text-base text-muted-foreground leading-relaxed pr-14 max-w-3xl">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

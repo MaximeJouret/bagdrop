@@ -1,4 +1,4 @@
-import { Star, Quote } from "lucide-react";
+import { Star } from "lucide-react";
 
 const reviews = [
   {
@@ -29,47 +29,55 @@ const reviews = [
 
 export function B2CTestimonials() {
   return (
-    <section className="py-20 md:py-24 px-4 bg-[var(--brand-cream)] dark:bg-muted/20">
+    <section className="py-24 md:py-32 px-6 bg-[var(--brand-cream)] dark:bg-muted/20">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <p className="text-xs font-mono tracking-widest uppercase text-primary mb-3">
-            Avis voyageurs
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--brand-charcoal)] dark:text-foreground mb-4">
-            4,9/5 sur les 50 premières réservations
-          </h2>
-          <p className="text-xs text-muted-foreground/70 italic max-w-md mx-auto">
-            Données issues de notre période de test (Q1-Q2 2026). Avis
-            anonymisés pour le respect de la vie privée.
-          </p>
+        <div className="grid lg:grid-cols-12 gap-10 mb-16 lg:mb-20">
+          <div className="lg:col-span-6">
+            <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-cobalt)] mb-6 flex items-center gap-3">
+              <span className="w-8 h-px bg-[var(--brand-cobalt)]" />
+              Avis voyageurs
+            </p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.04em] text-[var(--brand-ink)] dark:text-foreground leading-[1.02]">
+              4,9 / 5
+              <br />
+              <span className="text-muted-foreground">
+                sur les 50 premières réservations.
+              </span>
+            </h2>
+          </div>
+          <div className="lg:col-span-5 lg:col-start-8 flex items-end">
+            <p className="text-xs text-muted-foreground/70 max-w-md">
+              Données issues de notre période de test (Q1-Q2 2026). Avis
+              anonymisés pour le respect de la vie privée.
+            </p>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-px bg-border rounded-2xl overflow-hidden border border-border">
           {reviews.map((review) => (
             <figure
               key={review.author}
-              className="rounded-2xl border border-border/50 bg-background p-7"
+              className="bg-card p-8 md:p-10 flex flex-col"
             >
-              <div className="flex items-center gap-1 mb-4">
+              <div className="flex items-center gap-1 mb-6">
                 {Array.from({ length: review.rating }).map((_, i) => (
                   <Star
                     key={i}
-                    className="h-4 w-4 fill-[var(--brand-gold)] text-[var(--brand-gold)]"
+                    className="h-4 w-4 fill-[var(--brand-yellow)] text-[var(--brand-yellow)]"
                   />
                 ))}
               </div>
-              <Quote className="h-5 w-5 text-primary/30 mb-3" />
-              <blockquote className="text-sm text-[var(--brand-charcoal)]/90 dark:text-foreground/90 leading-relaxed mb-5 italic">
+              <blockquote className="text-base text-foreground leading-relaxed mb-8 flex-1">
                 « {review.quote} »
               </blockquote>
-              <figcaption className="border-t border-border/50 pt-4">
-                <p className="font-semibold text-sm text-[var(--brand-charcoal)] dark:text-foreground">
+              <figcaption className="border-t border-border pt-5">
+                <p className="font-bold text-sm text-[var(--brand-ink)] dark:text-foreground">
                   {review.author}
                 </p>
                 <p className="text-xs text-muted-foreground">
                   {review.context}
                 </p>
-                <p className="text-xs font-mono text-muted-foreground/70 mt-1">
+                <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground/70 mt-2">
                   {review.date}
                 </p>
               </figcaption>

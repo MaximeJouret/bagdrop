@@ -1,9 +1,34 @@
 const stats = [
-  { value: "31M", label: "passagers / an", sub: "Zaventem + Charleroi" },
-  { value: "8,5M", label: "nuitées hôtelières", sub: "Bruxelles, 2024" },
-  { value: "62%", label: "voyageurs business", sub: "Premier marché européen" },
-  { value: "+8%", label: "croissance annuelle", sub: "Tourisme 2025-2030" },
-];
+  {
+    value: "31M",
+    label: "passagers / an",
+    sub: "Zaventem + Charleroi",
+    size: "lg",
+  },
+  {
+    value: "8,5M",
+    label: "nuitées hôtelières",
+    sub: "Bruxelles, 2024",
+    size: "lg",
+  },
+  {
+    value: "62%",
+    label: "voyageurs business",
+    sub: "Premier marché européen",
+    size: "md",
+  },
+  {
+    value: "+8%",
+    label: "croissance annuelle",
+    sub: "Tourisme 2025-2030",
+    size: "md",
+  },
+] as const;
+
+const sizeClass = {
+  lg: "text-5xl md:text-6xl lg:text-7xl",
+  md: "text-4xl md:text-5xl",
+} as const;
 
 export function B2BStatsBar() {
   return (
@@ -27,7 +52,9 @@ export function B2BStatsBar() {
                 i < stats.length - 1 ? "lg:border-r border-white/15 lg:pr-6" : ""
               }`}
             >
-              <p className="text-5xl md:text-6xl lg:text-7xl font-extrabold font-mono tracking-[-0.045em] mb-3 leading-none">
+              <p
+                className={`${sizeClass[s.size]} font-extrabold font-mono tracking-[-0.045em] mb-3 leading-none`}
+              >
                 {s.value}
               </p>
               <p className="text-base font-semibold leading-tight">{s.label}</p>

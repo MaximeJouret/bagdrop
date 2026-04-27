@@ -29,7 +29,7 @@ export function B2BPartnerForm() {
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.04em] text-[var(--brand-ink)] dark:text-foreground leading-[1.02] mb-8">
               Quinze minutes
               <br />
-              <span className="highlight text-[var(--brand-ink)] dark:text-foreground">pour transformer</span>
+              <span className="text-muted-foreground">pour transformer</span>
               <br />
               votre conciergerie.
             </h2>

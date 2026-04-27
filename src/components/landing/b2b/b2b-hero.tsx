@@ -25,14 +25,12 @@ export function B2BHero() {
               Pour les hôtels bruxellois
             </p>
             <h1 className="text-[2.75rem] sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[0.92] tracking-[-0.045em] text-[var(--brand-ink)] dark:text-foreground mb-8">
-              Le concierge
-              <br />
+              Le concierge{" "}
               <span className="highlight text-[var(--brand-ink)] dark:text-foreground">
                 bagages
-              </span>{" "}
-              de votre
+              </span>
               <br />
-              hôtel.
+              de votre hôtel.
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed mb-10 fade-up-delay-1">

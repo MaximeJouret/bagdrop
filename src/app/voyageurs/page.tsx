@@ -6,10 +6,9 @@ import { B2CTrust } from "@/components/landing/b2c/b2c-trust";
 import { B2CTestimonials } from "@/components/landing/b2c/b2c-testimonials";
 import { B2CFAQ } from "@/components/landing/b2c/b2c-faq";
 import { B2CFinalCTA } from "@/components/landing/b2c/b2c-final-cta";
-import { MapSection } from "@/components/landing/map-section";
 
 export const metadata = {
-  title: "BagDrop pour les voyageurs — Service de livraison bagages Bruxelles",
+  title: "BagDrop — De votre hôtel à votre porte d'embarquement",
   description:
     "Confiez vos bagages à BagDrop. Collecte à votre hôtel, livraison à l'aéroport. Brussels Airport et Charleroi. Assurance 1500€, GPS temps réel.",
 };
@@ -21,7 +20,6 @@ export default function VoyageursPage() {
       <B2CPainNarrative />
       <B2CServiceJourney />
       <B2CTrust />
-      <MapSection />
       <B2CPricing />
       <B2CTestimonials />
       <B2CFAQ />

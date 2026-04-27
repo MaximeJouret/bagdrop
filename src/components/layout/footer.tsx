@@ -1,97 +1,114 @@
 import Link from "next/link";
-import { Luggage, Play, Camera, Briefcase, Music } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
-const navLinks = [
-  { name: "Emplacements", href: "/#emplacements" },
-  { name: "Comment ca marche", href: "/#comment-ca-marche" },
+const hotelLinks = [
+  { name: "Notre service", href: "/#processus" },
+  { name: "Couverture", href: "/#couverture" },
   { name: "Tarifs", href: "/#tarifs" },
+  { name: "Devenir partenaire", href: "/#partenariat" },
+];
+
+const travelerLinks = [
+  { name: "Le parcours", href: "/voyageurs#parcours" },
+  { name: "Tarifs", href: "/voyageurs#tarifs" },
+  { name: "FAQ", href: "/voyageurs#faq" },
+  { name: "Réserver", href: "/reserver" },
 ];
 
 const legalLinks = [
-  { name: "Mentions legales", href: "/mentions-legales" },
-  { name: "Conditions generales", href: "/conditions-generales" },
-  { name: "Politique de confidentialite", href: "/confidentialite" },
-];
-
-const socialLinks = [
-  { icon: Play, href: "#", label: "YouTube" },
-  { icon: Camera, href: "#", label: "Instagram" },
-  { icon: Music, href: "#", label: "TikTok" },
-  { icon: Briefcase, href: "#", label: "LinkedIn" },
+  { name: "Mentions légales", href: "/mentions-legales" },
+  { name: "Conditions générales", href: "/conditions-generales" },
+  { name: "Politique de confidentialité", href: "/confidentialite" },
 ];
 
 export function Footer() {
   return (
-    <footer className="border-t bg-muted/30">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand */}
-          <div>
-            <div className="flex items-center gap-2 font-bold text-lg mb-3">
-              <Luggage className="h-5 w-5 text-primary" />
-              <span>BagDrop</span>
-            </div>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Consigne de bagages connectee aux meilleurs emplacements
-              touristiques de Bruxelles.
+    <footer className="bg-[var(--brand-ink)] text-white">
+      <div className="container mx-auto px-6 py-20 md:py-24">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 mb-16">
+          {/* Brand block */}
+          <div className="lg:col-span-5">
+            <Link href="/" className="flex items-baseline gap-2 mb-6">
+              <span className="text-3xl font-extrabold tracking-[-0.04em] text-white">
+                BagDrop
+              </span>
+              <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/40">
+                Brussels · 2026
+              </span>
+            </Link>
+            <p className="text-base text-white/60 leading-relaxed max-w-md mb-8">
+              Logistique bagages premium pour les hôtels et voyageurs
+              bruxellois. De votre chambre à votre porte d'embarquement.
             </p>
+            <a
+              href="mailto:hello@bagdrop.be"
+              className="inline-flex items-center text-sm font-semibold text-[var(--brand-yellow)] hover:text-white transition-colors group"
+            >
+              hello@bagdrop.be
+              <ArrowUpRight className="ml-1 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
           </div>
 
-          {/* Navigation */}
-          <div>
-            <h3 className="text-sm font-semibold mb-3">Navigation</h3>
-            <nav className="flex flex-col gap-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </nav>
-          </div>
+          <div className="lg:col-span-7 grid sm:grid-cols-3 gap-10">
+            <div>
+              <h3 className="text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--brand-yellow)] mb-5 font-bold">
+                Hôteliers
+              </h3>
+              <nav className="flex flex-col gap-3">
+                {hotelLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="text-sm text-white/70 hover:text-white transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </nav>
+            </div>
 
-          {/* Legal */}
-          <div>
-            <h3 className="text-sm font-semibold mb-3">Legal</h3>
-            <nav className="flex flex-col gap-2">
-              {legalLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </nav>
-          </div>
+            <div>
+              <h3 className="text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--brand-yellow)] mb-5 font-bold">
+                Voyageurs
+              </h3>
+              <nav className="flex flex-col gap-3">
+                {travelerLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="text-sm text-white/70 hover:text-white transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </nav>
+            </div>
 
-          {/* Social */}
-          <div>
-            <h3 className="text-sm font-semibold mb-3">Suivez-nous</h3>
-            <div className="flex gap-3">
-              {socialLinks.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="w-9 h-9 rounded-lg bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
-                >
-                  <s.icon className="h-4 w-4" />
-                </a>
-              ))}
+            <div>
+              <h3 className="text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--brand-yellow)] mb-5 font-bold">
+                Légal
+              </h3>
+              <nav className="flex flex-col gap-3">
+                {legalLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="text-sm text-white/70 hover:text-white transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </nav>
             </div>
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t text-center">
-          <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} BagDrop. Tous droits reserves.
+        <div className="pt-10 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <p className="text-xs font-mono text-white/40">
+            © {new Date().getFullYear()} BagDrop SRL · Bruxelles, Belgique
+          </p>
+          <p className="text-xs font-mono uppercase tracking-[0.2em] text-white/40">
+            Bêta · Q2 2026
           </p>
         </div>
       </div>

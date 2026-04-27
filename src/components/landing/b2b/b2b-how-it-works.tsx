@@ -50,9 +50,7 @@ export function B2BHowItWorks() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.04em] text-[var(--brand-ink)] dark:text-foreground leading-[1.02] mb-6">
             Quatre étapes,
             <br />
-            <span className="highlight text-[var(--brand-ink)] dark:text-foreground">
-              zéro friction.
-            </span>
+            <span className="text-muted-foreground">zéro friction.</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl">
             Une opération intégrée à votre flux quotidien. Aucun matériel à

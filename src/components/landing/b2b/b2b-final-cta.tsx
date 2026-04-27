@@ -19,7 +19,7 @@ export function B2BFinalCTA() {
           Vous êtes hôtelier à Bruxelles ?
         </p>
 
-        <h2 className="text-5xl md:text-7xl lg:text-9xl font-extrabold tracking-[-0.05em] mb-10 leading-[0.92] max-w-4xl">
+        <h2 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-[-0.045em] mb-10 leading-[0.95] max-w-4xl">
           Vos concurrents
           <br />
           <span className="text-[var(--brand-yellow)]">y pensent déjà.</span>

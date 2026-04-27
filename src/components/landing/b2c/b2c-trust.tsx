@@ -29,37 +29,43 @@ const guarantees = [
 
 export function B2CTrust() {
   return (
-    <section className="py-20 md:py-24 px-4 bg-background">
+    <section className="py-24 md:py-32 px-6 bg-[var(--brand-cream)] dark:bg-muted/20">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <p className="text-xs font-mono tracking-widest uppercase text-primary mb-3">
-            Confiance & sécurité
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--brand-charcoal)] dark:text-foreground mb-4">
-            Vos bagages valent plus qu'un trajet en taxi
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            On le sait. C'est pourquoi chaque bagage confié à BagDrop bénéficie
-            de quatre couches de protection.
-          </p>
+        <div className="grid lg:grid-cols-12 gap-10 mb-16 lg:mb-20">
+          <div className="lg:col-span-6">
+            <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-cobalt)] mb-6 flex items-center gap-3">
+              <span className="w-8 h-px bg-[var(--brand-cobalt)]" />
+              Confiance & sécurité
+            </p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.04em] text-[var(--brand-ink)] dark:text-foreground leading-[1.02]">
+              Vos bagages valent
+              <br />
+              <span className="text-muted-foreground">plus qu'un trajet en taxi.</span>
+            </h2>
+          </div>
+          <div className="lg:col-span-6 flex items-end">
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
+              On le sait. C'est pourquoi chaque bagage confié à BagDrop
+              bénéficie de quatre couches de protection, vérifiables à chaque
+              étape du transport.
+            </p>
+          </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden border border-border">
           {guarantees.map((g) => (
-            <div
-              key={g.title}
-              className="text-center p-6 rounded-2xl border border-border/50 bg-[var(--brand-cream)]/30 hover:bg-[var(--brand-cream)]/60 transition-colors"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <g.icon className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="font-semibold text-base mb-2 text-[var(--brand-charcoal)] dark:text-foreground">
+            <article key={g.title} className="bg-card p-8">
+              <g.icon
+                strokeWidth={1.5}
+                className="h-7 w-7 text-[var(--brand-cobalt)] mb-6"
+              />
+              <h3 className="font-bold text-lg tracking-[-0.02em] text-[var(--brand-ink)] dark:text-foreground mb-3">
                 {g.title}
               </h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {g.description}
               </p>
-            </div>
+            </article>
           ))}
         </div>
       </div>
