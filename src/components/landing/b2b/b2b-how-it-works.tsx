@@ -43,13 +43,14 @@ export function B2BHowItWorks() {
     >
       <div className="container mx-auto max-w-6xl">
         <div className="mb-16 lg:mb-20 max-w-3xl">
-          <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-coral)] mb-6">
-            ◇ Le processus
+          <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-cobalt)] mb-6 flex items-center gap-3">
+            <span className="w-8 h-px bg-[var(--brand-cobalt)]" />
+            Le processus
           </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter text-[var(--brand-ink)] dark:text-foreground leading-[1.05] mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.04em] text-[var(--brand-ink)] dark:text-foreground leading-[1.02] mb-6">
             Quatre étapes,
             <br />
-            <span className="italic font-light text-[var(--brand-emerald)]">
+            <span className="highlight text-[var(--brand-ink)] dark:text-foreground">
               zéro friction.
             </span>
           </h2>
@@ -63,24 +64,24 @@ export function B2BHowItWorks() {
           {steps.map((step) => (
             <article
               key={step.num}
-              className="bg-card p-8 flex flex-col h-full relative"
+              className="bg-card p-8 flex flex-col h-full"
             >
               <div className="flex items-baseline justify-between mb-10">
-                <span className="text-7xl font-semibold font-mono text-[var(--brand-emerald)]/15 leading-none tracking-tighter">
+                <span className="text-7xl font-extrabold font-mono text-[var(--brand-cobalt)]/15 leading-none tracking-[-0.045em]">
                   {step.num}
                 </span>
                 <step.icon
                   strokeWidth={1.5}
-                  className="h-6 w-6 text-[var(--brand-emerald)]"
+                  className="h-6 w-6 text-[var(--brand-cobalt)]"
                 />
               </div>
-              <h3 className="font-semibold text-xl tracking-tight text-[var(--brand-ink)] dark:text-foreground mb-3 leading-tight">
+              <h3 className="font-bold text-xl tracking-[-0.025em] text-[var(--brand-ink)] dark:text-foreground mb-3 leading-tight">
                 {step.title}
               </h3>
               <p className="text-sm text-muted-foreground leading-relaxed mb-8 flex-1">
                 {step.description}
               </p>
-              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--brand-coral)] border-t border-border pt-5">
+              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--brand-cobalt)] font-semibold border-t border-border pt-5">
                 {step.timing}
               </p>
             </article>

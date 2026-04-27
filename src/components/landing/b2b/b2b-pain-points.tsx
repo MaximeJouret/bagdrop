@@ -29,25 +29,24 @@ export function B2BPainPoints() {
     <section className="py-24 md:py-32 px-6 bg-background">
       <div className="container mx-auto max-w-6xl">
         <div className="grid lg:grid-cols-12 gap-10 mb-16 lg:mb-20">
-          <div className="lg:col-span-5">
-            <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-coral)] mb-6">
-              ◇ Le problème
+          <div className="lg:col-span-6">
+            <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-cobalt)] mb-6 flex items-center gap-3">
+              <span className="w-8 h-px bg-[var(--brand-cobalt)]" />
+              Le problème
             </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter text-[var(--brand-ink)] dark:text-foreground leading-[1.05]">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.04em] text-[var(--brand-ink)] dark:text-foreground leading-[1.02]">
               Les bagages,
               <br />
-              <span className="italic font-light text-muted-foreground">
-                l'angle mort
-              </span>
+              <span className="text-muted-foreground">l'angle mort</span>
               <br />
               de la fin de séjour.
             </h2>
           </div>
-          <div className="lg:col-span-6 lg:col-start-7 flex items-end">
+          <div className="lg:col-span-6 flex items-end">
             <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
               Chaque jour, vos clients quittent leur chambre en milieu de
               matinée pour un vol en fin de journée. Entre les deux, leurs
-              bagages deviennent <span className="text-foreground font-medium">votre</span> problème.
+              bagages deviennent <span className="text-foreground font-semibold">votre</span> problème.
             </p>
           </div>
         </div>
@@ -56,23 +55,23 @@ export function B2BPainPoints() {
           {painPoints.map((point, i) => (
             <article
               key={point.problem}
-              className="bg-card p-8 md:p-10 flex flex-col group"
+              className="bg-card p-8 md:p-10 flex flex-col group hover:bg-[var(--brand-cream)] transition-colors"
             >
-              <span className="text-xs font-mono text-[var(--brand-coral)] mb-8">
+              <span className="text-xs font-mono text-[var(--brand-cobalt)] mb-8 font-semibold">
                 0{i + 1} / 03
               </span>
               <point.icon
                 strokeWidth={1.5}
-                className="h-7 w-7 text-[var(--brand-emerald)] mb-6"
+                className="h-7 w-7 text-[var(--brand-cobalt)] mb-6"
               />
-              <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-[var(--brand-ink)] dark:text-foreground mb-4 leading-tight">
+              <h3 className="text-2xl md:text-3xl font-bold tracking-[-0.025em] text-[var(--brand-ink)] dark:text-foreground mb-4 leading-tight">
                 {point.problem}
               </h3>
               <p className="text-sm text-muted-foreground leading-relaxed mb-8 flex-1">
                 {point.description}
               </p>
-              <p className="text-sm font-medium text-[var(--brand-emerald)] border-t border-border pt-5 flex items-center gap-2">
-                <span className="text-[var(--brand-coral)]">→</span>
+              <p className="text-sm font-semibold text-[var(--brand-cobalt)] border-t border-border pt-5 flex items-center gap-2">
+                <span>→</span>
                 {point.solution}
               </p>
             </article>

@@ -42,18 +42,17 @@ export function B2BFAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-24 md:py-32 px-6 bg-background">
+    <section id="faq" className="py-24 md:py-32 px-6 bg-[var(--brand-cream)] dark:bg-muted/20">
       <div className="container mx-auto max-w-4xl">
         <div className="mb-16">
-          <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-coral)] mb-6">
-            ◇ Questions fréquentes
+          <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-cobalt)] mb-6 flex items-center gap-3">
+            <span className="w-8 h-px bg-[var(--brand-cobalt)]" />
+            Questions fréquentes
           </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter text-[var(--brand-ink)] dark:text-foreground leading-[1.05]">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.04em] text-[var(--brand-ink)] dark:text-foreground leading-[1.02]">
             Tout ce que votre direction
             <br />
-            <span className="italic font-light text-muted-foreground">
-              veut savoir.
-            </span>
+            <span className="text-muted-foreground">veut savoir.</span>
           </h2>
         </div>
 
@@ -67,14 +66,14 @@ export function B2BFAQ() {
                   className="w-full flex items-center justify-between gap-6 py-6 text-left group"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-base md:text-lg font-medium text-[var(--brand-ink)] dark:text-foreground group-hover:text-[var(--brand-emerald)] transition-colors">
+                  <span className="text-base md:text-lg font-semibold text-[var(--brand-ink)] dark:text-foreground group-hover:text-[var(--brand-cobalt)] transition-colors">
                     {faq.q}
                   </span>
-                  <span className="shrink-0 w-8 h-8 rounded-full border border-border flex items-center justify-center group-hover:border-[var(--brand-emerald)] group-hover:bg-[var(--brand-emerald)] transition-all">
+                  <span className="shrink-0 w-9 h-9 rounded-full border border-border flex items-center justify-center group-hover:border-[var(--brand-cobalt)] group-hover:bg-[var(--brand-cobalt)] transition-all">
                     {isOpen ? (
-                      <Minus className="h-3.5 w-3.5 text-[var(--brand-emerald)] group-hover:text-[var(--brand-ivory)]" />
+                      <Minus className="h-3.5 w-3.5 text-[var(--brand-cobalt)] group-hover:text-white" />
                     ) : (
-                      <Plus className="h-3.5 w-3.5 text-foreground group-hover:text-[var(--brand-ivory)]" />
+                      <Plus className="h-3.5 w-3.5 text-foreground group-hover:text-white" />
                     )}
                   </span>
                 </button>

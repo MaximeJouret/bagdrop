@@ -34,19 +34,18 @@ export function B2BCoverage() {
   return (
     <section
       id="couverture"
-      className="py-24 md:py-32 px-6 bg-[var(--brand-cream)] dark:bg-muted/20"
+      className="py-24 md:py-32 px-6 bg-background"
     >
       <div className="container mx-auto max-w-6xl">
         <div className="mb-16 lg:mb-20 max-w-3xl">
-          <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-coral)] mb-6">
-            ◇ Zone de service
+          <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-cobalt)] mb-6 flex items-center gap-3">
+            <span className="w-8 h-px bg-[var(--brand-cobalt)]" />
+            Zone de service
           </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter text-[var(--brand-ink)] dark:text-foreground leading-[1.05]">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.04em] text-[var(--brand-ink)] dark:text-foreground leading-[1.02]">
             Tout Bruxelles,
             <br />
-            <span className="italic font-light text-[var(--brand-emerald)]">
-              deux aéroports.
-            </span>
+            <span className="text-[var(--brand-cobalt)]">deux aéroports.</span>
           </h2>
         </div>
 
@@ -58,10 +57,10 @@ export function B2BCoverage() {
             >
               <div className="flex items-start justify-between mb-10">
                 <div>
-                  <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-[var(--brand-coral)]">
+                  <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-[var(--brand-cobalt)] font-semibold">
                     Aéroport · {airport.code}
                   </span>
-                  <h3 className="text-3xl md:text-4xl font-semibold tracking-tight text-[var(--brand-ink)] dark:text-foreground mt-3">
+                  <h3 className="text-3xl md:text-4xl font-bold tracking-[-0.03em] text-[var(--brand-ink)] dark:text-foreground mt-3">
                     {airport.name}
                   </h3>
                   <p className="text-sm text-muted-foreground">
@@ -72,7 +71,7 @@ export function B2BCoverage() {
                   strokeWidth={1.25}
                   className={`h-7 w-7 ${
                     airport.primary
-                      ? "text-[var(--brand-emerald)]"
+                      ? "text-[var(--brand-cobalt)]"
                       : "text-muted-foreground"
                   }`}
                 />
@@ -87,7 +86,7 @@ export function B2BCoverage() {
         </div>
 
         <div className="bg-card border border-border border-t-0 rounded-b-2xl p-10 md:p-12">
-          <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-[var(--brand-coral)] mb-5">
+          <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-[var(--brand-cobalt)] font-semibold mb-5">
             Zones de collecte
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3">
@@ -100,7 +99,7 @@ export function B2BCoverage() {
               </p>
             ))}
           </div>
-          <p className="text-xs text-muted-foreground/70 mt-6 italic">
+          <p className="text-xs text-muted-foreground/70 mt-6">
             Hors zone ? Contactez-nous pour évaluer la faisabilité.
           </p>
         </div>
@@ -115,9 +114,7 @@ function Metric({ label, value }: { label: string; value: string }) {
       <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-2">
         {label}
       </p>
-      <p className="font-mono text-base font-semibold text-foreground">
-        {value}
-      </p>
+      <p className="font-mono text-base font-bold text-foreground">{value}</p>
     </div>
   );
 }
