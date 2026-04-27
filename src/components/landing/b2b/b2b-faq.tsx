@@ -10,23 +10,19 @@ const faqs = [
   },
   {
     q: "Que se passe-t-il en cas de perte ou de dommage ?",
-    a: "Chaque bagage est assuré jusqu'à 1 500€ via notre RC professionnelle (police dédiée transport de marchandises). En cas de sinistre, votre client est indemnisé directement par notre assureur sous 15 jours, sans implication de votre établissement.",
+    a: "Chaque bagage est assuré jusqu'à 1 500€ via notre RC professionnelle. En cas de sinistre, votre client est indemnisé directement par notre assureur sous 15 jours, sans implication de votre établissement.",
   },
   {
     q: "Comment se déroule la mise en place ?",
-    a: "Onboarding en 72h : signature du contrat-cadre, livraison de la tablette de réservation, formation de 30 min de votre équipe (réception + conciergerie), et tests grandeur nature sur 5 réservations gratuites pour valider le flux.",
+    a: "Onboarding en 72h : signature du contrat-cadre, livraison de la tablette de réservation, formation de 30 min de votre équipe, et tests grandeur nature sur 5 réservations gratuites pour valider le flux.",
   },
   {
     q: "Quel volume minimum est requis ?",
-    a: "Aucun minimum sur la formule Boutique. Pour la formule Premium, nous recommandons un volume cible de 30 réservations par mois pour rentabiliser l'account manager dédié — mais ce seuil est indicatif, pas contractuel.",
+    a: "Aucun minimum sur la formule Boutique. Pour la formule Premium, nous recommandons un volume cible de 30 réservations par mois — mais ce seuil est indicatif, pas contractuel.",
   },
   {
     q: "Comment sont versées les commissions ?",
-    a: "Versement mensuel par virement SEPA, le 5 du mois suivant. Vous recevez automatiquement un relevé détaillé (réservations, montants, commissions, TVA) compatible avec votre comptabilité.",
-  },
-  {
-    q: "Pouvez-vous gérer les pics de saisonnalité ?",
-    a: "Notre flotte est dimensionnée pour absorber les pics (avril-juin, septembre-octobre, fêtes de fin d'année). Engagement contractuel : aucune réservation refusée pour cause de capacité, sauf demande de dernière minute (moins de 2h avant).",
+    a: "Versement mensuel par virement SEPA, le 5 du mois suivant. Vous recevez automatiquement un relevé détaillé compatible avec votre comptabilité.",
   },
   {
     q: "Le service fonctionne-t-il pour Brussels Airport et Charleroi ?",
@@ -34,51 +30,47 @@ const faqs = [
   },
   {
     q: "Comment intégrez-vous avec notre PMS (Mews, Opera, Cloudbeds) ?",
-    a: "API REST disponible sur la formule Premium. Intégrations natives prêtes pour Mews et Cloudbeds, en cours de développement pour Opera Cloud. Sur Boutique, la tablette dédiée fonctionne en autonomie sans intégration PMS.",
+    a: "API REST disponible sur la formule Premium. Intégrations natives prêtes pour Mews et Cloudbeds, en cours de développement pour Opera Cloud. Sur Boutique, la tablette dédiée fonctionne en autonomie.",
   },
 ];
 
 export function B2BFAQ() {
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-24 md:py-32 px-6 bg-[var(--brand-cream)] dark:bg-muted/20">
-      <div className="container mx-auto max-w-4xl">
-        <div className="mb-16">
-          <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-cobalt)] mb-6 flex items-center gap-3">
-            <span className="w-8 h-px bg-[var(--brand-cobalt)]" />
-            Questions fréquentes
-          </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.04em] text-[var(--brand-ink)] dark:text-foreground leading-[1.02]">
+    <section id="faq" className="py-32 md:py-48 px-6 bg-background">
+      <div className="container mx-auto max-w-3xl">
+        <div className="text-center mb-20 md:mb-24">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.025em] text-[var(--brand-ink)] dark:text-foreground leading-[1.1]">
             Vos questions,
             <br />
             <span className="text-muted-foreground">nos réponses.</span>
           </h2>
         </div>
 
-        <div className="border-t border-border">
+        <div>
           {faqs.map((faq, i) => {
             const isOpen = open === i;
             return (
-              <div key={i} className="border-b border-border">
+              <div key={i} className="border-t border-border last:border-b">
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between gap-6 py-6 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-cobalt)] focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md"
+                  className="w-full flex items-center justify-between gap-6 py-8 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-cobalt)] focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-base md:text-lg font-semibold text-[var(--brand-ink)] dark:text-foreground group-hover:text-[var(--brand-cobalt)] transition-colors">
+                  <span className="text-lg md:text-xl font-medium text-[var(--brand-ink)] dark:text-foreground">
                     {faq.q}
                   </span>
-                  <span className="shrink-0 w-9 h-9 rounded-full border border-border flex items-center justify-center group-hover:border-[var(--brand-cobalt)] group-hover:bg-[var(--brand-cobalt)] transition-all">
+                  <span className="shrink-0">
                     {isOpen ? (
-                      <Minus className="h-3.5 w-3.5 text-[var(--brand-cobalt)] group-hover:text-white" />
+                      <Minus className="h-5 w-5 text-[var(--brand-cobalt)]" />
                     ) : (
-                      <Plus className="h-3.5 w-3.5 text-foreground group-hover:text-white" />
+                      <Plus className="h-5 w-5 text-foreground" />
                     )}
                   </span>
                 </button>
                 {isOpen && (
-                  <div className="pb-6 text-base text-muted-foreground leading-relaxed pr-14 max-w-3xl">
+                  <div className="pb-8 text-base md:text-lg text-muted-foreground leading-relaxed pr-12 max-w-3xl">
                     {faq.a}
                   </div>
                 )}

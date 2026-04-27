@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const b2bNav = [
   { name: "Processus", href: "/#processus" },
@@ -30,46 +30,39 @@ export function Header() {
   const ctaLabel = isB2C ? "Réserver" : "Devenir partenaire";
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/85 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70">
-      <div className="container mx-auto flex h-16 items-center justify-between px-6">
+    <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-xl border-b border-border/40">
+      <div className="container mx-auto flex h-14 items-center justify-between px-6">
         <Link
           href="/"
-          className="flex items-baseline gap-2 group"
+          className="text-base font-semibold tracking-tight text-[var(--brand-ink)] dark:text-foreground hover:text-[var(--brand-cobalt)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-cobalt)] rounded-md"
         >
-          <span className="text-xl font-semibold tracking-tighter text-[var(--brand-ink)] dark:text-foreground">
-            BagDrop
-          </span>
-          <span className="hidden sm:inline-block text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground border-l border-border/60 pl-2">
-            {isB2C ? "Voyageurs" : "Hôtels"}
-          </span>
+          BagDrop
         </Link>
 
-        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
           {navigation.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="text-sm text-muted-foreground hover:text-[var(--brand-emerald)] transition-colors"
+              className="text-sm text-foreground/70 hover:text-foreground transition-colors"
             >
               {item.name}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-6">
           <Link
             href={switchHref}
-            className="text-xs font-mono uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors"
+            className="text-sm text-foreground/60 hover:text-foreground transition-colors"
           >
             {switchLabel}
           </Link>
           <Link
             href={ctaHref}
-            className="inline-flex items-center h-9 px-4 rounded-full text-sm font-medium bg-[var(--brand-ink)] text-[var(--brand-ivory)] hover:bg-[var(--brand-emerald)] transition-colors group"
+            className="inline-flex items-center h-9 px-4 rounded-full text-sm font-medium bg-[var(--brand-cobalt)] text-white hover:bg-[var(--brand-cobalt-deep)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-cobalt)] focus-visible:ring-offset-2"
           >
             {ctaLabel}
-            <ArrowRight className="ml-1.5 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
 
@@ -79,21 +72,17 @@ export function Header() {
           aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
           aria-expanded={mobileOpen}
         >
-          {mobileOpen ? (
-            <X className="h-5 w-5" />
-          ) : (
-            <Menu className="h-5 w-5" />
-          )}
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
       {mobileOpen && (
-        <nav className="md:hidden border-t border-border/60 bg-background px-6 py-6 flex flex-col gap-4">
+        <nav className="md:hidden border-t border-border/40 bg-background px-6 py-6 flex flex-col gap-4">
           {navigation.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="text-base text-foreground hover:text-[var(--brand-emerald)] transition-colors"
+              className="text-base text-foreground hover:text-[var(--brand-cobalt)] transition-colors"
               onClick={() => setMobileOpen(false)}
             >
               {item.name}
@@ -101,18 +90,17 @@ export function Header() {
           ))}
           <Link
             href={switchHref}
-            className="text-sm font-mono uppercase tracking-[0.15em] text-[var(--brand-emerald)] border-t border-border/60 pt-4 mt-2"
+            className="text-sm text-[var(--brand-cobalt)] border-t border-border/40 pt-4 mt-2"
             onClick={() => setMobileOpen(false)}
           >
-            → {switchLabel}
+            {switchLabel}
           </Link>
           <Link
             href={ctaHref}
-            className="inline-flex items-center justify-center h-11 px-5 rounded-full text-sm font-medium bg-[var(--brand-ink)] text-[var(--brand-ivory)] mt-2"
+            className="inline-flex items-center justify-center h-11 px-5 rounded-full text-sm font-medium bg-[var(--brand-cobalt)] text-white mt-2"
             onClick={() => setMobileOpen(false)}
           >
             {ctaLabel}
-            <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
           </Link>
         </nav>
       )}

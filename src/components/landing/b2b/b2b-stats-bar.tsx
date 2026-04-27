@@ -1,68 +1,34 @@
-const stats = [
-  {
-    value: "31M",
-    label: "passagers / an",
-    sub: "Zaventem + Charleroi",
-    size: "lg",
-  },
-  {
-    value: "8,5M",
-    label: "nuitées hôtelières",
-    sub: "Bruxelles, 2024",
-    size: "lg",
-  },
-  {
-    value: "62%",
-    label: "voyageurs business",
-    sub: "Premier marché européen",
-    size: "md",
-  },
-  {
-    value: "+8%",
-    label: "croissance annuelle",
-    sub: "Tourisme 2025-2030",
-    size: "md",
-  },
-] as const;
-
-const sizeClass = {
-  lg: "text-5xl md:text-6xl lg:text-7xl",
-  md: "text-4xl md:text-5xl",
-} as const;
-
 export function B2BStatsBar() {
   return (
-    <section className="bg-[var(--brand-cobalt-deep)] text-white py-16 md:py-20 px-6 grain">
-      <div className="container mx-auto max-w-6xl">
-        <div className="flex items-baseline justify-between mb-12 flex-wrap gap-4">
-          <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-yellow)] flex items-center gap-3">
-            <span className="w-8 h-px bg-[var(--brand-yellow)]" />
-            Le marché bruxellois
-          </p>
-          <p className="text-xs font-mono uppercase tracking-widest text-white/40">
-            Sources : visit.brussels, Brussels Airport Co.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-6">
-          {stats.map((s, i) => (
-            <div
-              key={s.label}
-              className={`${
-                i < stats.length - 1 ? "lg:border-r border-white/15 lg:pr-6" : ""
-              }`}
-            >
-              <p
-                className={`${sizeClass[s.size]} font-extrabold font-mono tracking-[-0.045em] mb-3 leading-none`}
-              >
-                {s.value}
-              </p>
-              <p className="text-base font-semibold leading-tight">{s.label}</p>
-              <p className="text-xs text-white/50 mt-1">{s.sub}</p>
-            </div>
-          ))}
+    <section className="bg-background pt-12 pb-24 md:pt-16 md:pb-32 px-6">
+      <div className="container mx-auto max-w-5xl text-center">
+        <p className="text-sm md:text-base text-muted-foreground mb-6">
+          Le marché bruxellois
+        </p>
+        <p className="text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] font-semibold tracking-[-0.045em] leading-none text-[var(--brand-ink)] dark:text-foreground mb-8">
+          31<span className="text-[var(--brand-cobalt)]">M</span>
+        </p>
+        <p className="text-lg md:text-xl text-foreground max-w-xl mx-auto leading-relaxed">
+          de passagers transitent chaque année par les aéroports
+          belges. Et chacun d'eux a passé une nuit quelque part.
+        </p>
+        <div className="mt-16 grid grid-cols-3 gap-8 max-w-3xl mx-auto pt-12 border-t border-border">
+          <Stat value="8,5M" label="Nuitées hôtelières" />
+          <Stat value="62%" label="Voyageurs business" />
+          <Stat value="+8%" label="Croissance annuelle" />
         </div>
       </div>
     </section>
+  );
+}
+
+function Stat({ value, label }: { value: string; label: string }) {
+  return (
+    <div>
+      <p className="text-3xl md:text-4xl font-semibold tracking-tight text-[var(--brand-ink)] dark:text-foreground mb-2">
+        {value}
+      </p>
+      <p className="text-sm text-muted-foreground">{label}</p>
+    </div>
   );
 }

@@ -177,18 +177,30 @@
   html {
     @apply font-sans;
   }
-  /* Display typography — Cobalt confident */
+  /* Display typography — Apple-inspired calm hierarchy */
   h1, h2, h3, h4 {
-    letter-spacing: -0.025em;
-    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-weight: 600;
   }
   h1 {
-    letter-spacing: -0.045em;
-    font-weight: 800;
+    letter-spacing: -0.03em;
+    font-weight: 600;
   }
   h2 {
-    letter-spacing: -0.035em;
-    font-weight: 700;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+  }
+}
+
+/* Apple-like section rhythm utility */
+.section-rhythm {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+@media (min-width: 768px) {
+  .section-rhythm {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
   }
 }
 

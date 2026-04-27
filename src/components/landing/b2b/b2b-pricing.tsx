@@ -7,43 +7,37 @@ const tiers = [
     name: "Boutique",
     target: "Hôtels indépendants < 50 chambres",
     commission: "12%",
-    setup: "Offerte",
     features: [
       "Tablette de réservation incluse",
       "Formation équipe 30 min",
       "Support email + téléphone",
-      "Reporting mensuel automatique",
       "1 collecte programmée par jour",
     ],
-    cta: "Demander un devis",
+    cta: "Recevoir un devis",
     highlighted: false,
   },
   {
     name: "Premium",
     target: "Hôtels 4-5★ ou 50-150 chambres",
     commission: "15%",
-    setup: "Offerte",
     features: [
       "Tout Boutique, plus :",
       "Collectes multiples par jour",
       "Account manager dédié",
       "API d'intégration PMS",
-      "Reporting personnalisé",
       "Service prioritaire 7j/7",
     ],
-    cta: "Devenir partenaire premium",
+    cta: "Choisir Premium",
     highlighted: true,
   },
   {
     name: "Groupe",
     target: "Chaînes & groupes 3+ établissements",
     commission: "Sur mesure",
-    setup: "Sur mesure",
     features: [
       "Contrat cadre multi-sites",
       "Branding personnalisable",
       "SLA garantis",
-      "Intégration ERP / CRM",
       "Comité de pilotage trimestriel",
     ],
     cta: "Nous contacter",
@@ -55,56 +49,38 @@ export function B2BPricing() {
   return (
     <section
       id="tarifs"
-      className="py-24 md:py-32 px-6 bg-background"
+      className="py-32 md:py-48 px-6 bg-background"
     >
       <div className="container mx-auto max-w-6xl">
-        <div className="grid lg:grid-cols-12 gap-10 mb-16 lg:mb-20">
-          <div className="lg:col-span-6">
-            <p className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--brand-cobalt)] mb-6 flex items-center gap-3">
-              <span className="w-8 h-px bg-[var(--brand-cobalt)]" />
-              Modèles de partenariat
-            </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.04em] text-[var(--brand-ink)] dark:text-foreground leading-[1.02]">
-              Trois formules,
-              <br />
-              <span className="text-muted-foreground">zéro frais cachés.</span>
-            </h2>
-          </div>
-          <div className="lg:col-span-5 lg:col-start-8 flex items-end">
-            <div>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-3">
-                Aucun investissement initial. Vous touchez votre commission dès
-                la première réservation.
-              </p>
-              <p className="text-xs text-muted-foreground/70">
-                Tarifs indicatifs — ajustables selon volume et conditions
-                spécifiques.
-              </p>
-            </div>
-          </div>
+        <div className="text-center mb-20 md:mb-28 max-w-3xl mx-auto">
+          <p className="text-sm text-[var(--brand-cobalt)] mb-4">
+            Modèles de partenariat
+          </p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.025em] text-[var(--brand-ink)] dark:text-foreground leading-[1.1]">
+            Trois formules,
+            <br />
+            <span className="text-muted-foreground">zéro frais cachés.</span>
+          </h2>
+          <p className="text-sm text-muted-foreground mt-8">
+            Tarifs indicatifs — affinés selon votre volume.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-px bg-border rounded-2xl overflow-hidden border border-border">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
           {tiers.map((tier) => (
             <article
               key={tier.name}
               className={cn(
-                "p-8 md:p-10 flex flex-col relative",
+                "rounded-3xl p-8 md:p-10 flex flex-col",
                 tier.highlighted
                   ? "bg-[var(--brand-cobalt-deep)] text-white"
-                  : "bg-card"
+                  : "bg-[var(--brand-cream)]"
               )}
             >
-              {tier.highlighted && (
-                <span className="absolute top-6 right-6 text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--brand-cobalt-deep)] bg-[var(--brand-yellow)] px-3 py-1 rounded-full font-bold">
-                  Recommandé
-                </span>
-              )}
-
               <div className="mb-8">
                 <h3
                   className={cn(
-                    "text-3xl font-bold tracking-[-0.03em] mb-2",
+                    "text-2xl font-semibold tracking-tight mb-2",
                     tier.highlighted
                       ? "text-white"
                       : "text-[var(--brand-ink)] dark:text-foreground"
@@ -114,7 +90,7 @@ export function B2BPricing() {
                 </h3>
                 <p
                   className={cn(
-                    "text-xs",
+                    "text-sm",
                     tier.highlighted ? "text-white/60" : "text-muted-foreground"
                   )}
                 >
@@ -122,16 +98,11 @@ export function B2BPricing() {
                 </p>
               </div>
 
-              <div
-                className={cn(
-                  "mb-8 pb-8 border-b",
-                  tier.highlighted ? "border-white/15" : "border-border"
-                )}
-              >
+              <div className="mb-8">
                 <div className="flex items-baseline gap-2 mb-1">
                   <span
                     className={cn(
-                      "text-6xl font-extrabold font-mono tracking-[-0.05em] leading-none",
+                      "text-5xl md:text-6xl font-semibold tracking-[-0.04em] leading-none",
                       tier.highlighted
                         ? "text-white"
                         : "text-[var(--brand-ink)] dark:text-foreground"
@@ -154,11 +125,11 @@ export function B2BPricing() {
                 </div>
                 <p
                   className={cn(
-                    "text-xs mt-2",
+                    "text-sm mt-2",
                     tier.highlighted ? "text-white/60" : "text-muted-foreground"
                   )}
                 >
-                  Activation : {tier.setup}
+                  Activation offerte
                 </p>
               </div>
 
@@ -187,10 +158,10 @@ export function B2BPricing() {
               <Link
                 href="#partenariat"
                 className={cn(
-                  "inline-flex items-center justify-center h-11 px-5 rounded-full text-sm font-semibold transition-colors",
+                  "inline-flex items-center justify-center h-11 px-5 rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
                   tier.highlighted
-                    ? "bg-[var(--brand-yellow)] text-[var(--brand-cobalt-deep)] hover:bg-[var(--brand-yellow-deep)]"
-                    : "bg-[var(--brand-cobalt)] text-white hover:bg-[var(--brand-cobalt-deep)]"
+                    ? "bg-[var(--brand-yellow)] text-[var(--brand-cobalt-deep)] hover:bg-[var(--brand-yellow-deep)] focus-visible:ring-[var(--brand-yellow)] focus-visible:ring-offset-[var(--brand-cobalt-deep)]"
+                    : "bg-[var(--brand-cobalt)] text-white hover:bg-[var(--brand-cobalt-deep)] focus-visible:ring-[var(--brand-cobalt)] focus-visible:ring-offset-[var(--brand-cream)]"
                 )}
               >
                 {tier.cta}
