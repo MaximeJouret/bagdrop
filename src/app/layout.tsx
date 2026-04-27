@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/motion/scroll-progress";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,17 +18,29 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BagDrop — Consigne de bagages à Bruxelles",
+  title: "BagDrop — Logistique bagages premium à Bruxelles",
   description:
-    "Déposez vos bagages en toute sécurité dans nos casiers connectés aux meilleurs emplacements touristiques de Bruxelles. Réservez en ligne, accédez par QR code.",
+    "Le concierge bagages de votre hôtel. Collecte chez vos clients, livraison directe à l'aéroport. Brussels Airport et Charleroi.",
   openGraph: {
-    title: "BagDrop — Consigne de bagages à Bruxelles",
+    title: "BagDrop — Logistique bagages premium à Bruxelles",
     description:
-      "Déposez vos bagages en toute sécurité dans nos casiers connectés aux meilleurs emplacements touristiques de Bruxelles.",
+      "Collecte chez vos clients, livraison directe à l'aéroport. Brussels Airport et Charleroi.",
     locale: "fr_BE",
     type: "website",
   },
 };
+
+// Inline script to apply stored theme before hydration (avoids flash)
+const noFlashScript = `
+(function() {
+  try {
+    var t = localStorage.getItem('bagdrop-theme');
+    if (t && t !== 'cobalt' && (t === 'hyperreality' || t === 'dopamine')) {
+      document.documentElement.classList.add('theme-' + t);
+    }
+  } catch (e) {}
+})();
+`;
 
 export default function RootLayout({
   children,
@@ -38,6 +52,9 @@ export default function RootLayout({
       lang="fr"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: noFlashScript }} />
+      </head>
       <body className="min-h-full flex flex-col">
         <a
           href="#main"
@@ -45,12 +62,15 @@ export default function RootLayout({
         >
           Aller au contenu principal
         </a>
-        <ScrollProgress />
-        <Header />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <ThemeProvider>
+          <ScrollProgress />
+          <Header />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+          <ThemeSwitcher />
+        </ThemeProvider>
       </body>
     </html>
   );
