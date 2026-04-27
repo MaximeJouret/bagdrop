@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Caveat } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/motion/scroll-progress";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ThemeSwitcher } from "@/components/theme/theme-switcher";
+import { AtelierMascot } from "@/components/theme/atelier-mascot";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,6 +16,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -35,8 +42,8 @@ const noFlashScript = `
 (function() {
   try {
     var t = localStorage.getItem('bagdrop-theme');
-    if (t === 'dopamine') {
-      document.documentElement.classList.add('theme-dopamine');
+    if (t === 'dopamine' || t === 'atelier') {
+      document.documentElement.classList.add('theme-' + t);
     }
   } catch (e) {}
 })();
@@ -50,7 +57,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: noFlashScript }} />
@@ -70,6 +77,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <ThemeSwitcher />
+          <AtelierMascot />
         </ThemeProvider>
       </body>
     </html>

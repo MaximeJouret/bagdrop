@@ -168,6 +168,148 @@
   letter-spacing: -0.03em;
 }
 
+/* ========================================================================
+ * THEME 3 — ATELIER
+ * Hand-drawn, illustrated, playful. Inspired by Lennnie's blob universe.
+ * Warm pastels (peach, coral, dusty pink, butter yellow), handwritten
+ * accents via Caveat, subtle paper texture.
+ * ======================================================================== */
+.theme-atelier {
+  --background: oklch(0.95 0.04 60);                /* warm peach cream */
+  --foreground: oklch(0.24 0.04 35);                 /* warm dark brown */
+  --card: oklch(0.98 0.025 70);                      /* lighter peach */
+  --card-foreground: oklch(0.24 0.04 35);
+  --popover: oklch(0.98 0.025 70);
+  --popover-foreground: oklch(0.24 0.04 35);
+
+  --primary: oklch(0.62 0.16 30);                    /* coral terracotta #E07050 */
+  --primary-foreground: oklch(0.97 0.03 70);
+
+  --secondary: oklch(0.92 0.05 65);
+  --secondary-foreground: oklch(0.24 0.04 35);
+  --muted: oklch(0.91 0.04 60);
+  --muted-foreground: oklch(0.42 0.05 35);
+
+  --accent: oklch(0.92 0.05 65);
+  --accent-foreground: oklch(0.24 0.04 35);
+
+  --border: oklch(0.78 0.06 50 / 50%);
+  --input: oklch(0.78 0.06 50 / 50%);
+  --ring: oklch(0.62 0.16 30);
+
+  /* Brand semantic — Atelier remap */
+  --brand-cobalt: oklch(0.62 0.16 30);              /* coral as primary */
+  --brand-cobalt-deep: oklch(0.32 0.1 30);           /* deep terracotta brown */
+  --brand-ink: oklch(0.24 0.04 35);                  /* warm dark text */
+  --brand-ivory: oklch(0.95 0.04 60);                /* peach cream */
+  --brand-cream: oklch(0.88 0.07 45);                /* dusty pink section */
+  --brand-yellow: oklch(0.85 0.13 85);               /* butter yellow */
+  --brand-yellow-deep: oklch(0.72 0.16 50);          /* warm orange */
+
+  --brand-emerald: oklch(0.62 0.16 30);
+  --brand-emerald-deep: oklch(0.32 0.1 30);
+  --brand-coral: oklch(0.85 0.13 85);
+  --brand-charcoal: oklch(0.24 0.04 35);
+  --brand-sand: oklch(0.85 0.04 75);
+
+  --radius: 0.875rem;                                /* slightly more curve */
+}
+
+/* Atelier: warm paper texture over the body */
+.theme-atelier body {
+  background-color: var(--background);
+  background-image:
+    radial-gradient(at 12% 18%, oklch(0.95 0.08 35 / 0.5) 0%, transparent 45%),
+    radial-gradient(at 88% 82%, oklch(0.92 0.07 80 / 0.4) 0%, transparent 45%);
+  background-attachment: fixed;
+}
+
+/* Atelier: paper grain overlay */
+.theme-atelier::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='paper'><feTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' seed='5'/><feColorMatrix values='0 0 0 0 0.4  0 0 0 0 0.25  0 0 0 0 0.18  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23paper)'/></svg>");
+}
+
+/* Atelier: handwritten H1 with Caveat */
+.theme-atelier h1 {
+  font-family: var(--font-caveat) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  line-height: 1 !important;
+}
+
+/* Slight wobble on hero handwritten title */
+.theme-atelier h1 > * {
+  display: inline-block;
+}
+
+/* Atelier: more rounded, softer corners */
+.theme-atelier .rounded-3xl {
+  border-radius: 1.75rem;
+}
+
+.theme-atelier .rounded-2xl {
+  border-radius: 1.25rem;
+}
+
+/* Atelier: chunky underline on .highlight (coral marker style) */
+.theme-atelier .highlight {
+  background: linear-gradient(
+    180deg,
+    transparent 60%,
+    oklch(0.85 0.13 85 / 0.7) 60%,
+    oklch(0.85 0.13 85 / 0.7) 95%,
+    transparent 95%
+  );
+  padding: 0 0.15em;
+}
+
+/* Atelier: subtle wobble on hover for cards */
+@media (prefers-reduced-motion: no-preference) {
+  .theme-atelier article:hover,
+  .theme-atelier .group:hover {
+    animation: atelier-jiggle 0.4s ease-in-out;
+  }
+}
+
+@keyframes atelier-jiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-0.4deg); }
+  75% { transform: rotate(0.4deg); }
+}
+
+/* Atelier: mascot bob animation */
+@keyframes atelier-bob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+.atelier-mascot {
+  animation: atelier-bob 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atelier-mascot {
+    animation: none;
+  }
+}
+
+/* Atelier: handwritten note style for marginalia */
+.atelier-note {
+  font-family: var(--font-caveat);
+  font-weight: 500;
+  font-size: 1.15rem;
+  color: var(--brand-cobalt);
+  transform: rotate(-3deg);
+  display: inline-block;
+}
+
 .dark {
   --background: oklch(0.13 0.025 255);
   --foreground: oklch(0.97 0.005 90);
