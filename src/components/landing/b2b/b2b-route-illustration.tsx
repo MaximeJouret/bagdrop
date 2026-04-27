@@ -111,29 +111,36 @@ export function B2BRouteIllustration() {
               BagDrop
             </text>
 
-            {/* Airport (right) */}
-            <g transform="translate(1080, 70)">
-              {/* Tower */}
-              <rect
-                x="20"
-                y="0"
-                width="14"
-                height="60"
-                fill="var(--brand-cream)"
-                stroke="var(--brand-cobalt)"
-                strokeWidth="1.5"
-              />
-              {/* Plane silhouette */}
+            {/* Airport — stylized airplane (right) */}
+            <g transform="translate(1060, 80)">
+              {/* Fuselage */}
               <path
-                d="M 0 25 L 40 20 L 50 18 L 60 20 L 60 30 L 50 32 L 40 30 L 0 35 Z"
+                d="M 0 22
+                   Q 6 18, 30 16
+                   L 60 12
+                   Q 76 12, 76 22
+                   Q 76 26, 70 28
+                   Q 60 28, 30 28
+                   Q 6 26, 0 22 Z"
                 fill="var(--brand-cobalt)"
-                opacity="0.6"
               />
-              {/* Runway lines */}
-              <line x1="-10" y1="55" x2="70" y2="55" stroke="var(--brand-border)" strokeWidth="1" strokeDasharray="3 3" />
+              {/* Top wing (above fuselage) */}
+              <path
+                d="M 32 16 L 38 -2 L 44 -2 L 48 16 Z"
+                fill="var(--brand-cobalt-deep)"
+              />
+              {/* Tail fin */}
+              <path
+                d="M 4 16 L 8 4 L 14 4 L 18 16 Z"
+                fill="var(--brand-cobalt-deep)"
+              />
+              {/* Cockpit window */}
+              <circle cx="62" cy="20" r="2" fill="var(--brand-yellow)" opacity="0.95" />
+              {/* Engine highlight */}
+              <rect x="38" y="22" width="14" height="3" rx="1" fill="var(--brand-cobalt-deep)" opacity="0.5" />
             </g>
             <text
-              x="1110"
+              x="1100"
               y="155"
               textAnchor="middle"
               className="fill-muted-foreground"

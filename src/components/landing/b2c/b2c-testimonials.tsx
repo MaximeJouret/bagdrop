@@ -59,10 +59,15 @@ export function B2CTestimonials() {
               key={review.author}
               className="bg-card p-8 md:p-10 flex flex-col"
             >
-              <div className="flex items-center gap-1 mb-6">
+              <div
+                className="flex items-center gap-1 mb-6"
+                role="img"
+                aria-label={`Note : ${review.rating} sur 5`}
+              >
                 {Array.from({ length: review.rating }).map((_, i) => (
                   <Star
                     key={i}
+                    aria-hidden="true"
                     className="h-4 w-4 fill-[var(--brand-yellow)] text-[var(--brand-yellow)]"
                   />
                 ))}

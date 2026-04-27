@@ -17,7 +17,7 @@ const painPoints = [
   },
   {
     icon: Star,
-    problem: "Score Booking en jeu",
+    problem: "Votre note Booking en jeu",
     description:
       "Une mauvaise expérience de fin de séjour, c'est une note moyenne qui descend. Et un guest qui ne reviendra pas.",
     solution: "Service premium qui marque.",

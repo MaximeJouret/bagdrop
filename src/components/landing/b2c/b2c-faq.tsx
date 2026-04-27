@@ -50,9 +50,9 @@ export function B2CFAQ() {
             Questions fréquentes
           </p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.04em] text-[var(--brand-ink)] dark:text-foreground leading-[1.02]">
-            Tout ce que vous voulez
+            Vos questions,
             <br />
-            <span className="text-muted-foreground">savoir.</span>
+            <span className="text-muted-foreground">nos réponses.</span>
           </h2>
         </div>
 
@@ -63,7 +63,7 @@ export function B2CFAQ() {
               <div key={i} className="border-b border-border">
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between gap-6 py-6 text-left group"
+                  className="w-full flex items-center justify-between gap-6 py-6 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-cobalt)] focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md"
                   aria-expanded={isOpen}
                 >
                   <span className="text-base md:text-lg font-semibold text-[var(--brand-ink)] dark:text-foreground group-hover:text-[var(--brand-cobalt)] transition-colors">

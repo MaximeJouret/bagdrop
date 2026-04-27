@@ -74,9 +74,10 @@ export function Header() {
         </div>
 
         <button
-          className="md:hidden p-2 -mr-2"
+          className="md:hidden p-3 -mr-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-cobalt)]"
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Menu"
+          aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-expanded={mobileOpen}
         >
           {mobileOpen ? (
             <X className="h-5 w-5" />

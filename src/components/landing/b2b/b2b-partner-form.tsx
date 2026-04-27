@@ -35,7 +35,7 @@ export function B2BPartnerForm() {
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-10">
               Laissez-nous vos coordonnées. Un de nos cofondateurs vous
-              recontacte sous 24h pour un appel de cadrage. Pas de commercial
+              rappelle dans les 24h pour un premier échange. Pas de commercial
               agressif, pas de force de vente.
             </p>
 
@@ -84,8 +84,7 @@ export function B2BPartnerForm() {
                     Demande reçue
                   </h3>
                   <p className="text-muted-foreground max-w-md mx-auto">
-                    Un membre de l'équipe BagDrop vous contacte sous 24h
-                    ouvrées.
+                    Un cofondateur vous appelle dans les 24h.
                   </p>
                 </div>
               ) : (
@@ -151,7 +150,7 @@ export function B2BPartnerForm() {
                   </div>
                   <div>
                     <Label htmlFor="email" className="mb-1.5 text-xs font-mono uppercase tracking-widest text-muted-foreground">
-                      Email professionnel
+                      Email pro
                     </Label>
                     <Input
                       id="email"
@@ -174,9 +173,9 @@ export function B2BPartnerForm() {
                   </div>
                   <button
                     type="submit"
-                    className="inline-flex items-center justify-center w-full h-12 px-6 rounded-full text-base font-semibold bg-[var(--brand-cobalt)] text-white hover:bg-[var(--brand-cobalt-deep)] transition-colors group mt-2"
+                    className="inline-flex items-center justify-center w-full h-12 px-6 rounded-full text-base font-semibold bg-[var(--brand-cobalt)] text-white hover:bg-[var(--brand-cobalt-deep)] transition-colors group mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-cobalt)] focus-visible:ring-offset-2 focus-visible:ring-offset-card"
                   >
-                    Demander un appel de cadrage
+                    Programmer un échange
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </button>
                   <p className="text-xs text-muted-foreground text-center">

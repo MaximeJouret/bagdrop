@@ -10,8 +10,8 @@ export function B2BHero() {
           <span>BagDrop · Brussels</span>
           <span className="hidden sm:inline">Hospitality Logistics · Est. 2026</span>
           <span className="text-[var(--brand-cobalt)] flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-cobalt)] animate-pulse" />
-            Available now
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-cobalt)] animate-pulse motion-reduce:animate-none" aria-hidden="true" />
+            Pré-lancement · 2026
           </span>
         </div>
       </div>
@@ -43,16 +43,16 @@ export function B2BHero() {
             <div className="flex flex-col sm:flex-row gap-3 fade-up-delay-2">
               <Link
                 href="#partenariat"
-                className="inline-flex items-center justify-center h-12 px-7 rounded-full text-base font-semibold bg-[var(--brand-cobalt)] text-white hover:bg-[var(--brand-cobalt-deep)] transition-colors group"
+                className="inline-flex items-center justify-center h-12 px-7 rounded-full text-base font-semibold bg-[var(--brand-cobalt)] text-white hover:bg-[var(--brand-cobalt-deep)] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-cobalt)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 Devenir hôtel partenaire
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 href="#processus"
-                className="inline-flex items-center justify-center h-12 px-5 text-base font-semibold text-foreground hover:text-[var(--brand-cobalt)] transition-colors group"
+                className="inline-flex items-center justify-center h-12 px-5 text-base font-semibold text-foreground hover:text-[var(--brand-cobalt)] transition-colors group rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-cobalt)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
-                Voir le processus
+                Voir comment ça marche
                 <ArrowUpRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>

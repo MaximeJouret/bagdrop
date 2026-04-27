@@ -7,7 +7,7 @@ const tiers = [
     name: "Boutique",
     target: "Hôtels indépendants < 50 chambres",
     commission: "12%",
-    setup: "Gratuit",
+    setup: "Offerte",
     features: [
       "Tablette de réservation incluse",
       "Formation équipe 30 min",
@@ -22,7 +22,7 @@ const tiers = [
     name: "Premium",
     target: "Hôtels 4-5★ ou 50-150 chambres",
     commission: "15%",
-    setup: "Gratuit",
+    setup: "Offerte",
     features: [
       "Tout Boutique, plus :",
       "Collectes multiples par jour",
@@ -158,7 +158,7 @@ export function B2BPricing() {
                     tier.highlighted ? "text-white/60" : "text-muted-foreground"
                   )}
                 >
-                  Mise en service : {tier.setup}
+                  Activation : {tier.setup}
                 </p>
               </div>
 

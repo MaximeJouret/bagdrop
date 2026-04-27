@@ -39,7 +39,7 @@ export function B2CFinalCTA() {
         <div className="flex flex-col sm:flex-row gap-3 items-start">
           <Link
             href="/reserver"
-            className="inline-flex items-center h-12 px-7 rounded-full text-base font-semibold bg-[var(--brand-yellow)] text-[var(--brand-cobalt-deep)] hover:bg-[var(--brand-yellow-deep)] transition-colors group"
+            className="inline-flex items-center h-12 px-7 rounded-full text-base font-semibold bg-[var(--brand-yellow)] text-[var(--brand-cobalt-deep)] hover:bg-[var(--brand-yellow-deep)] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-yellow)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-ink)]"
           >
             Réserver ma livraison
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

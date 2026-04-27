@@ -20,9 +20,9 @@ export function B2BFinalCTA() {
         </p>
 
         <h2 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-[-0.045em] mb-10 leading-[0.95] max-w-4xl">
-          Vos concurrents
+          Soyez le premier
           <br />
-          <span className="text-[var(--brand-yellow)]">y pensent déjà.</span>
+          <span className="text-[var(--brand-yellow)]">à l'offrir.</span>
         </h2>
 
         <p className="text-lg md:text-xl text-white/70 mb-12 max-w-2xl leading-relaxed">
@@ -33,7 +33,7 @@ export function B2BFinalCTA() {
         <div className="flex flex-col sm:flex-row gap-3 items-start">
           <Link
             href="#partenariat"
-            className="inline-flex items-center h-12 px-7 rounded-full text-base font-semibold bg-[var(--brand-yellow)] text-[var(--brand-cobalt-deep)] hover:bg-[var(--brand-yellow-deep)] transition-colors group"
+            className="inline-flex items-center h-12 px-7 rounded-full text-base font-semibold bg-[var(--brand-yellow)] text-[var(--brand-cobalt-deep)] hover:bg-[var(--brand-yellow-deep)] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-yellow)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-ink)]"
           >
             Devenir hôtel partenaire
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -48,7 +48,7 @@ export function B2BFinalCTA() {
         </div>
 
         <p className="text-xs font-mono text-white/40 mt-12 pt-12 border-t border-white/15">
-          Numéro fictif pour la démonstration — sera remplacé en production.
+          Numéro de démo — sera remplacé en production.
         </p>
       </div>
     </section>
