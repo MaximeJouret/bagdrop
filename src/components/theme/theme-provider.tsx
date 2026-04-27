@@ -2,13 +2,13 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-export type Theme = "cobalt" | "hyperreality" | "dopamine";
+export type Theme = "cobalt" | "dopamine";
 
 export const THEMES: Array<{
   id: Theme;
   name: string;
   description: string;
-  /** Two color hex codes for the swatch preview */
+  /** Three color hex codes for the swatch preview */
   swatch: [string, string, string];
 }> = [
   {
@@ -16,12 +16,6 @@ export const THEMES: Array<{
     name: "Cobalt",
     description: "Calme, confiant, Apple-inspired",
     swatch: ["#FAFAF7", "#1E3A8A", "#FFC857"],
-  },
-  {
-    id: "hyperreality",
-    name: "Hyperreality",
-    description: "Surréel, immersif, AI-driven",
-    swatch: ["#1A0F2E", "#00E5DD", "#FF1F8A"],
   },
   {
     id: "dopamine",

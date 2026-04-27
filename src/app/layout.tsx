@@ -35,8 +35,8 @@ const noFlashScript = `
 (function() {
   try {
     var t = localStorage.getItem('bagdrop-theme');
-    if (t && t !== 'cobalt' && (t === 'hyperreality' || t === 'dopamine')) {
-      document.documentElement.classList.add('theme-' + t);
+    if (t === 'dopamine') {
+      document.documentElement.classList.add('theme-dopamine');
     }
   } catch (e) {}
 })();
