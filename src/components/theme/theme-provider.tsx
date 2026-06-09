@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-export type Theme = "cobalt" | "dopamine" | "atelier";
+export type Theme = "cobalt" | "dopamine" | "atelier" | "maison";
 
 export const THEMES: Array<{
   id: Theme;
@@ -16,6 +16,12 @@ export const THEMES: Array<{
     name: "Cobalt",
     description: "Calme, confiant, Apple-inspired",
     swatch: ["#FAFAF7", "#1E3A8A", "#FFC857"],
+  },
+  {
+    id: "maison",
+    name: "Maison",
+    description: "Heritage luxe, serif, Embelco",
+    swatch: ["#FFFFFF", "#232931", "#D4C8B5"],
   },
   {
     id: "dopamine",

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Caveat } from "next/font/google";
+import { Geist, Geist_Mono, Caveat, DM_Serif_Display } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/motion/scroll-progress";
@@ -24,6 +24,13 @@ const caveat = Caveat({
   weight: ["400", "600", "700"],
 });
 
+const dmSerif = DM_Serif_Display({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+});
+
 export const metadata: Metadata = {
   title: "BagDrop — Logistique bagages premium à Bruxelles",
   description:
@@ -42,7 +49,7 @@ const noFlashScript = `
 (function() {
   try {
     var t = localStorage.getItem('bagdrop-theme');
-    if (t === 'dopamine' || t === 'atelier') {
+    if (t === 'dopamine' || t === 'atelier' || t === 'maison') {
       document.documentElement.classList.add('theme-' + t);
     }
   } catch (e) {}
@@ -57,7 +64,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} ${dmSerif.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: noFlashScript }} />
