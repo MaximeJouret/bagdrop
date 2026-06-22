@@ -114,6 +114,20 @@
   --brand-charcoal: oklch(0.14 0.04 255);
   --brand-gold: oklch(0.85 0.13 88);
   --brand-sand: oklch(0.85 0.04 75);
+
+  /* Semantic feedback tokens (universal across all 4 themes) */
+  --semantic-success: oklch(0.6 0.16 145);
+  --semantic-success-fg: oklch(0.99 0.01 145);
+  --semantic-success-bg: oklch(0.96 0.04 145);
+  --semantic-warning: oklch(0.72 0.17 70);
+  --semantic-warning-fg: oklch(0.15 0.04 70);
+  --semantic-warning-bg: oklch(0.97 0.05 70);
+  --semantic-error: oklch(0.6 0.22 25);
+  --semantic-error-fg: oklch(0.99 0.01 25);
+  --semantic-error-bg: oklch(0.96 0.05 25);
+  --semantic-info: oklch(0.58 0.17 230);
+  --semantic-info-fg: oklch(0.99 0.01 230);
+  --semantic-info-bg: oklch(0.96 0.04 230);
 }
 
 /* ========================================================================

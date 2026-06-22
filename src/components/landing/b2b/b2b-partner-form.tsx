@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,6 +13,10 @@ export function B2BPartnerForm() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitted(true);
+    toast.success("Demande reçue", {
+      description: "Un cofondateur vous appelle dans les 24h.",
+      duration: 5000,
+    });
   }
 
   return (

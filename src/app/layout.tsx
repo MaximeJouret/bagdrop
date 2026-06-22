@@ -6,6 +6,7 @@ import { ScrollProgress } from "@/components/motion/scroll-progress";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 import { AtelierMascot } from "@/components/theme/atelier-mascot";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -85,6 +86,17 @@ export default function RootLayout({
           <Footer />
           <ThemeSwitcher />
           <AtelierMascot />
+          <Toaster
+            position="bottom-center"
+            richColors
+            closeButton
+            toastOptions={{
+              style: {
+                fontFamily: "var(--font-geist-sans)",
+                borderRadius: "0.75rem",
+              },
+            }}
+          />
         </ThemeProvider>
       </body>
     </html>
